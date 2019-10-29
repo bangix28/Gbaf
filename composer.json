@@ -1,0 +1,20 @@
+{
+    "name": "kenolane-granger/gbaf",
+    "description": "Blog pour un proje Openclassroom",
+    "type": "Blog",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "App\\" : "src/"
+        }
+    },
+
+    "authors": [
+        {
+            "name": "granger kenolane",
+            "email": "kenolane28@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
