@@ -12,5 +12,6 @@ public function userConnect()
     }
     else
     {
+        header('location:index.php?access=home');
     }
 }
