@@ -1,6 +1,6 @@
 <?php
 require 'vendor/autoload.php';
-use App\Controller;
+use App\Controller\Frontend;
 try
 {
 if (isset($_GET['access']))

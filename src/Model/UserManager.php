@@ -26,7 +26,7 @@ class UserManager extends Database
             {
                 session_start();
                 $_SESSION['id'] = $user['id'];
-                header("location:../index.php?access=userConnect");
+                header("location:../index.php?access=homeView");
             }else
                 {
                 throw new \Exception('Mauvais mot de passe');
