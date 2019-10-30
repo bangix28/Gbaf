@@ -21,10 +21,12 @@ class UserManager extends Database
         }else
             {
             $pass_hach = password_hash($_POST['password'], PASSWORD_DEFAULT);
-            $pass_exist = password_verify('$_POST['password'],$user['password']');
-            if ($pass_exist == false)
+            $result = password_verify($pass_hach, $user['password']);
+            if ($result == false)
             {
-                return 'false';
+                session_start();
+                $_SESSION['id'] = $user['id'];
+                header("location:../index.php?access=userConnect");
             }else
                 {
                 throw new \Exception('Mauvais mot de passe');

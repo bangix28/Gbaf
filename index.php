@@ -9,6 +9,13 @@ if (isset($_GET['access']))
     {
         userConnect();
     }
+    elseif($_GET['access'] == 'home')
+    {
+        if ($_SESSION == true);
+        {
+            require('src/homeView.php');
+        }
+    }
 }
 }
 catch (Exception $e)
