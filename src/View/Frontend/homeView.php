@@ -31,7 +31,7 @@
             <div class="col-lg-6">
                 <h3><?= $description ?></h3>
             </div>
-            <a href="../../../index.php?access=actorView&amp;id=<?= $actorId ?>"><p class="lead">Lire la suite</p></a>
+            <a href="../../../public/index.php?access=actorView&amp;id=<?= $actorId ?>"><p class="lead">Lire la suite</p></a>
             <?php
             }
             $partner->closeCursor();
