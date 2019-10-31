@@ -1,6 +1,6 @@
 <?php
-require 'vendor/autoload.php';
-use App\Controller\Frontend;
+require '../vendor/autoload.php';
+use App\Controller;
 try
 {
 if (isset($_GET['access']))
@@ -13,7 +13,7 @@ if (isset($_GET['access']))
     {
         if ($_SESSION == true);
         {
-            require('src/homeView.php');
+            require('../src/View/Frontend/homeView.php');
         }
     }
 }
