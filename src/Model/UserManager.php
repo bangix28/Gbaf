@@ -22,10 +22,9 @@ class UserManager extends Manager
             {
             $pass_hach = password_hash($_POST['password'], PASSWORD_DEFAULT);
             $result = password_verify($pass_hach, $user['password']);
-            if ($result == false)
+            if ($result == true)
             {
-                session_start();
-                $_SESSION['id'] = $user['id'];
+                $_SESSION['id'] = $user_exist['id'];
                 header("location:../index.php?access=homeView");
             }else
                 {
