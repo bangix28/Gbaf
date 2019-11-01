@@ -12,16 +12,10 @@ class Router
     {
         try
         {
-            if ($_SESSION == false)
-            {
-                registerUser();
-            }
-            else{
                 if($_GET['access'] == 'home')
                 {
                     require('View/Frontend/homeView.PHP');
                 }
-            }
         }
         catch (Exception $e)
         {
