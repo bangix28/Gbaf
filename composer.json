@@ -16,5 +16,11 @@
         }
     ],
     "minimum-stability": "stable",
-    "require": {}
+    "require": {
+        "php": "7.3.11",
+        "twig/twig": "^2.12.1"
+    },
+    "require-dev": {
+        "tracy/tracy": "^2.7.0"
+    }
 }
