@@ -1,6 +1,8 @@
 <?php
 namespace App;
 
+use function App\Controller\userConnect;
+
 /**
  * Class Router
  * Manages Routes to show Views
@@ -12,10 +14,19 @@ class Router
     {
         try
         {
-                if($_GET['access'] == 'home')
+                if(isset($_GET['access']))
                 {
-                    require('View/Frontend/homeView.PHP');
-                }
+                    if ($_GET ('access') == 'userConnect' )
+                    {
+                        userConnect();
+                    }
+                    elseif ($_GET['access'] == 'home')
+                    {
+                        require('View/Frontend/homeView.php');
+                    }
+                }else{
+                require ('View/Frontend/userConnectView.php');
+        }
         }
         catch (Exception $e)
         {
