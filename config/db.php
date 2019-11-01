@@ -1,10 +1,5 @@
 <?php
 
-class Database
-{
-    protected function dbConnect()
-    {
-        $bd = new PDO('mysql:host=localhost;dbname=gbaf;charset=utf8', 'root','');
-        return $bd;
-    }
-}
+define('DB_DSN', 'mysql:host=localhost;dbname=gbaf;charset=utf8');
+define('DB_USER', 'root');
+define('DB_PASS', '');
