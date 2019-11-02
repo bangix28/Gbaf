@@ -1,7 +1,8 @@
 <?php
 namespace App;
 
-use function App\Controller\userConnect;
+use App\Controller\Frontend;
+
 
 /**
  * Class Router
@@ -16,21 +17,22 @@ class Router
         {
                 if(isset($_GET['access']))
                 {
-                    if ($_GET ('access') == 'userConnect' )
+                    if ($_GET['access'] == 'connect' )
                     {
-                        userConnect();
+                     Frontend::userConnect();
                     }
                     elseif ($_GET['access'] == 'home')
                     {
                         require('View/Frontend/homeView.php');
                     }
                 }else{
-                require ('View/Frontend/userConnectView.php');
-        }
+                    Frontend::userConnect();
+                }
         }
         catch (Exception $e)
         {
             throw new Exception('Erreur:' . $e->getMessage());
+            require('View/Backend/errorView.php');
         }
     }
 }
