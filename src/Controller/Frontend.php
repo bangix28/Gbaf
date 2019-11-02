@@ -1,9 +1,11 @@
 <?php
 namespace App\Controller;
 use App\Model\UserManager;
-
-public function userConnect()
+class Frontend
 {
-    $userManager = new UserManager();
-    $user_connect = $userManager->userConnect();
+   static function userConnect()
+    {
+        $userManager = new userManager();
+        $user = $userManager->userConnect();
+    }
 }
