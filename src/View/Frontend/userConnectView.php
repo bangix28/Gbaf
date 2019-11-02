@@ -1,7 +1,7 @@
 <?php $title = 'Connexion au site du GBAF'; ?>
 <?php ob_start(); ?>
 
-<form method="post" action="../../../public/index.php?access=userConnect&amp;id=<?= $_SESSION['id']?>">
+<form method="POST" action="../../../public/index.php?access=userConnect">
     <fieldset>
         <legend>Legend</legend>
         <div class="form-group row">
@@ -13,7 +13,7 @@
             <label for="password1">Password</label>
             <input type="password" class="form-control" id="password1" placeholder="Password">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Envoyer</button>
         </div>
     </fieldset>
 </form>
