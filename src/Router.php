@@ -1,6 +1,9 @@
 <?php
 namespace App;
 
+use App\Controller\Frontend;
+
+
 /**
  * Class Router
  * Manages Routes to show Views
@@ -12,14 +15,24 @@ class Router
     {
         try
         {
-                if($_GET['access'] == 'home')
+                if(isset($_GET['access']))
                 {
-                    require('View/Frontend/homeView.PHP');
+                    if ($_GET['access'] == 'connect' )
+                    {
+                     Frontend::userConnect();
+                    }
+                    elseif ($_GET['access'] == 'home')
+                    {
+                        require('View/Frontend/homeView.php');
+                    }
+                }else{
+                    Frontend::userConnect();
                 }
         }
         catch (Exception $e)
         {
             throw new Exception('Erreur:' . $e->getMessage());
+            require('View/Backend/errorView.php');
         }
     }
 }

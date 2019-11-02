@@ -4,11 +4,16 @@
 namespace App\Model;
 
 
+use PDO;
+
 class Manager
 {
-    protected function __construct()
+    public function __construct()
     {
-        $bd = new PDO(DB_DSN, DB_USER, DB_PASS);
+        $db_dsn = DB_DSN;
+        $db_user = DB_USER;
+        $db_pass = DB_PASS;
+        $bd = new PDO('mysql:host=localhost;dbname=gbaf;charset=utf8', 'root', '');
         return $bd;
     }
 }
