@@ -6,4 +6,3 @@
 </div>
 <?php $content = ob_get_clean(); ?>
 
-<?php require('../Frontend/template.php'); ?>
