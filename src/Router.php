@@ -1,7 +1,8 @@
 <?php
 namespace App;
 
-use App\Controller\Frontend;
+use App\Controller;
+use Exception;
 
 
 /**
@@ -19,20 +20,19 @@ class Router
                 {
                     if ($_GET['access'] == 'connect' )
                     {
-                     Frontend::userConnect();
+                        Controller\Frontend::userConnect();
                     }
                     elseif ($_GET['access'] == 'home')
                     {
                         require('View/Frontend/homeView.php');
                     }
                 }else{
-                    Frontend::userConnect();
+                    require ('View/Frontend/userConnectView.php');
                 }
         }
-        catch (Exception $e)
-        {
-            throw new Exception('Erreur:' . $e->getMessage());
-            require('View/Backend/errorView.php');
+        catch(Exception $e) {
+            echo 'Erreur : ' . $e->getMessage();
+            require('View/Backend/ErrorView.php');
         }
     }
 }
