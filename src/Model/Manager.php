@@ -3,15 +3,13 @@
 
 namespace App\Model;
 
-
 use PDO;
 
 class Manager
 {
-    public function __construct()
+    public function dbConnect()
     {
-
-        $bd = new PDO(DB_DSN, DB_PASS, DB_USER, );
-        require '../config/db.php';
+        $bd = new PDO('mysql:host=localhost;dbname=gbaf;charset=utf8', 'root', '');
+        return $bd;
     }
 }
