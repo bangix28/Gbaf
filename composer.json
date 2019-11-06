@@ -1,7 +1,8 @@
 {
     "name": "kenolane-granger/gbaf",
-    "description": "Blog pour un proje Openclassroom",
-    "type": "Blog",
+    "version": "0.1.1",
+    "description": "Blog pour un projet Openclassrooms",
+    "type": "Project",
     "license": "MIT",
     "autoload": {
         "psr-4": {
@@ -17,7 +18,7 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "php": "7.3.11",
+        "php": "^7.2",
         "twig/twig": "^2.12.1"
     },
     "require-dev": {
