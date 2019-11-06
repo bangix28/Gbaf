@@ -5,7 +5,7 @@ use Exception;
 
 class Frontend
 {
-        static function userConnect()
+         static function connect()
     {
         $userManager = new userManager();
         $user = $userManager->userConnect();
@@ -16,5 +16,18 @@ class Frontend
         }else{
             throw new Exception('Mauvais identifiant');
         }
+    }
+    static function register()
+    {
+        $userManager = new userManager();
+        $user_test = $userManager->testUsername();
+        if($user_test == 0)
+        {
+         $user_register = $userManager->userRegister();
+        }else
+        {
+            throw new Exception('ce pseudo existe déja !');
+        }
+
     }
 }
