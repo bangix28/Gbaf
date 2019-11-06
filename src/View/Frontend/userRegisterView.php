@@ -15,9 +15,9 @@
 
     <div class="control-group">
       <!-- Name -->
-      <label class="control-label" for="name">nom</label>
+      <label class="control-label" for="user_name">nom</label>
       <div class="controls">
-        <input type="text" id="name" name="name" placeholder="" class="input-xlarge">
+        <input type="text" id="user_name" name="user_name" placeholder="" class="input-xlarge">
       </div>
     </div>
 
