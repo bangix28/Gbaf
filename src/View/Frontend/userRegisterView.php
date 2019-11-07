@@ -9,7 +9,7 @@
       <!-- Username -->
       <label class="control-label"  for="username">Username</label>
       <div class="controls">
-        <input type="text" id="username" name="username" placeholder="" class="input-xlarge">
+        <input type="text" required id="username" name="username" placeholder="" class="input-xlarge">
       </div>
     </div>
 
@@ -17,7 +17,7 @@
       <!-- Name -->
       <label class="control-label" for="name">nom</label>
       <div class="controls">
-        <input type="text" id="user_name" name="name" placeholder="" class="input-xlarge">
+        <input type="text" required id="user_name" name="name" placeholder="" class="input-xlarge">
       </div>
     </div>
 
@@ -25,7 +25,7 @@
           <!-- Lastname -->
           <label class="control-label" for="lastname">Prénom</label>
           <div class="controls">
-              <input type="text" id="lastname" name="lastname" placeholder="" class="input-xlarge">
+              <input type="text" required id="lastname" name="lastname" placeholder="" class="input-xlarge">
           </div>
       </div>
 
@@ -33,7 +33,7 @@
       <!-- Password-->
       <label class="control-label" for="password">Password</label>
       <div class="controls">
-        <input type="password" id="password" name="password" placeholder="" class="input-xlarge">
+        <input type="password" required id="password" name="password" placeholder="" class="input-xlarge">
       </div>
     </div>
       <div class="control-group">
@@ -50,7 +50,7 @@
               <!-- Answer-->
               <label class="control-label" for="answer">Réponse</label>
               <div class="controls">
-                  <textarea class="input-xlarge" name="answer"></textarea>
+                  <textarea  requiredclass="input-xlarge" name="answer"></textarea>
               </div>
           </div>
       </div>
