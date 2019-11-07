@@ -26,9 +26,11 @@ class UserManager extends Manager
      */
     public function userRegister()
     {
+        $pass_hach = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $db = $this->dbConnect();
-        $user = $db->prepare('INSERT INTO user(username, password, name, lastname, question , asnwer ) VALUE (?,?,?,?,?,?)');
-        $user->execute(array($_POST['username'],$_POST['password'],$_POST['name'],$_POST['lastname'],$_POST['question'],$_POST['answer']));
+        $user = $db->prepare('INSERT INTO user (username, password, name, lastname, question, answer) VALUES(?,?,?,?,?,?)');
+        ;
+        $user->execute(array($_POST['username'], $pass_hach, $_POST['name'], $_POST['lastname'], $_POST['question'], $_POST['answer']));
 
     }
 
