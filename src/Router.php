@@ -2,6 +2,7 @@
 namespace App;
 
 use App\Controller;
+use App\Controller\UserController;
 use Exception;
 
 
@@ -12,39 +13,45 @@ use Exception;
  */
 class Router
 {
+    /**
+     * @var Controller\UserController
+     */
+    private $userController = null;
+
+    /**
+     * UserController constructor.
+     */
+    public function __construct()
+    {
+        $this->userController = new UserController();
+    }
+
+    /**
+     *
+     */
     public function run()
     {
-        try
-        {
-                if(isset($_GET['access']))
-                {
-                    if ($_GET['access'] == 'connect' )
-                    {
-                        if(!empty($_POST['username']) AND !empty($_POST['password']))
-                        {
-                            Controller\Frontend::connect();
+        try {
+            switch ($_GET['access']) {
+                case 'connect':
+                    if (!empty($_POST['username']) && !empty($_POST['password'])) {
+                        $this->userController->connect();
                         }
+                    break;
+                case 'home':
+                    require 'View/Frontend/homeView.php';
+                    break;
+                case 'register':
+                    if (!empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['name']) && !empty($_POST['lastname']) && !empty($_POST['question']) && !empty($_POST['answer'])) {
+                        $this->userController->register();
                     }
-                    elseif ($_GET['access'] == 'home')
-                    {
-                        require('View/Frontend/homeView.php');
-                    }
-                    elseif ($_GET['access'] == 'registerView')
-                    {
-                        require ('View/Frontend/userRegisterView.php');
-                    }
-                    elseif ($_GET['access'] == 'register')
-                    {
-                        if (!empty($_POST['username']) AND !empty($_POST['user_name']) AND  !empty($_POST['lastname']) AND !empty($_POST['password']) AND !empty($_POST['question']) AND !empty($_POST['answer']))
-                        {
-                         Controller\Frontend::register();
-                        }else{
-                            throw new Exception('vous n\'avez pas remplis tout le champs');
-                        }
-                    }
-                }else{
-                    require ('View/Frontend/userConnectView.php');
-                }
+                        require 'View/Frontend/userRegisterView.php';
+                    break;
+                    default:
+                        require 'View/Frontend/userConnectView.php';
+            }
+
+
         }
         catch(Exception $e) {
             echo 'Erreur : ' . $e->getMessage();
