@@ -30,6 +30,7 @@ class UserController
     public function connect()
     {
         $user = $this->userManager->userConnect();
+        var_dump($user);
     }
 
     /**
