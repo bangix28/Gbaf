@@ -25,6 +25,10 @@ class Router
     {
         $this->userController = new UserController();
     }
+
+    /**
+     *
+     */
     public function run()
     {
         try {
@@ -35,10 +39,13 @@ class Router
                         }
                     break;
                 case 'home':
-
+                    require 'View/Frontend/homeView.php';
                     break;
                 case 'register':
-                        echo 'bonjour';
+                    if (!empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['name']) && !empty($_POST['lastname']) && !empty($_POST['question']) && !empty($_POST['answer'])) {
+                        $this->userController->register();
+                    }
+                        require 'View/Frontend/userRegisterView.php';
                     break;
                     default:
                         require 'View/Frontend/userConnectView.php';
