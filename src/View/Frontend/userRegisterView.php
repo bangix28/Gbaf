@@ -1,6 +1,6 @@
 <?php $title = 'Inscription'; ?>
 <?php ob_start(); ?>
-<form class="text-center" action='index.php?access=register' method="POST">
+<form class="text-center form-control" action='' method="POST">
   <fieldset>
     <div id="legend">
       <legend class="">Inscription</legend>
@@ -15,9 +15,9 @@
 
     <div class="control-group">
       <!-- Name -->
-      <label class="control-label" for="user_name">nom</label>
+      <label class="control-label" for="name">nom</label>
       <div class="controls">
-        <input type="text" id="user_name" name="user_name" placeholder="" class="input-xlarge">
+        <input type="text" id="user_name" name="name" placeholder="" class="input-xlarge">
       </div>
     </div>
 
