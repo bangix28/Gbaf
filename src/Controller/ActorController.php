@@ -22,11 +22,17 @@ class ActorController
         $this->actorManager = new ActorManager();
     }
 
+    /**
+     *
+     */
     public function listActor()
     {
        $this->actorManager->getActors();
     }
 
+    /**
+     *
+     */
     public function addCreator()
     {
         $this->actorManager->addCreator();
