@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="74c2d4dd-4611-46b0-ac28-1fa04382cd44" name="Default Changelist" comment="" />
+    <list default="true" id="74c2d4dd-4611-46b0-ac28-1fa04382cd44" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/GBAF.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/GBAF.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Manager.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Manager.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/Frontend/homeView.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/Frontend/homeView.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution>
       <executable />
     </execution>
@@ -16,12 +24,34 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="PhpWorkspaceProjectConfiguration">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/twig/twig" />
+      <path value="$PROJECT_DIR$/vendor/tracy/tracy" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
+    </include_path>
+  </component>
   <component name="ProjectId" id="1SsTaMpsFbePMBPgVuGKIM7Sp2f" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/images" />
+    <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\GBAF\public\images" />
+      <recent name="C:\xampp\htdocs\GBAF\config" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\GBAF\public" />
+      <recent name="C:\xampp\htdocs\GBAF" />
+      <recent name="C:\xampp\htdocs\GBAF\src\View\Frontend" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -45,7 +75,19 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1572351366339</updated>
-      <workItem from="1572351369229" duration="280000" />
+      <workItem from="1572351369229" duration="1210000" />
+      <workItem from="1572356400611" duration="8236000" />
+      <workItem from="1572435867610" duration="3927000" />
+      <workItem from="1572460501051" duration="129000" />
+      <workItem from="1572526992282" duration="2607000" />
+      <workItem from="1572872439920" duration="4974000" />
+      <workItem from="1572961875364" duration="7986000" />
+      <workItem from="1572973284529" duration="1344000" />
+      <workItem from="1573051325062" duration="6385000" />
+      <workItem from="1573068028514" duration="383000" />
+      <workItem from="1573127429955" duration="5595000" />
+      <workItem from="1573141147283" duration="13922000" />
+      <workItem from="1573156676867" duration="337000" />
     </task>
     <servers />
   </component>

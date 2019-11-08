@@ -29,7 +29,7 @@ class UserController
      */
     public function connect()
     {
-        $user = $this->userManager->userConnect();
+        $this->userManager->userConnect();
     }
 
     /**
@@ -39,7 +39,7 @@ class UserController
     {
         $user = $this->userManager->testUsername();
         if ($user == 0) {
-            var_dump($this->userManager->userRegister());
+            $this->userManager->userRegister();
         } else {
             throw new Exception('ce pseudo existe déja !');
         }

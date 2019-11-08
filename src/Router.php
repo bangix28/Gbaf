@@ -3,6 +3,7 @@ namespace App;
 
 use App\Controller;
 use App\Controller\UserController;
+use App\Controller\ActorController;
 use Exception;
 
 
@@ -17,6 +18,7 @@ class Router
      * @var Controller\UserController
      */
     private $userController = null;
+    private $actorController = null;
 
     /**
      * UserController constructor.
@@ -24,6 +26,7 @@ class Router
     public function __construct()
     {
         $this->userController = new UserController();
+        $this->actorController = new  ActorController();
     }
 
     /**
@@ -39,7 +42,10 @@ class Router
                         }
                     break;
                 case 'home':
+
+                    $this->actorController->listActor();
                     require 'View/Frontend/homeView.php';
+
                     break;
                 case 'register':
                     if (!empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['name']) && !empty($_POST['lastname']) && !empty($_POST['question']) && !empty($_POST['answer'])) {
