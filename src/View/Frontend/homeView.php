@@ -21,22 +21,24 @@
     </section>
     <section class="container">
 
-         <php while ($data = $partner->fetch())
+         <php
+         while ($data = $getActor->fetch())
+
         {
-          \ ?>
+          ?>
 
         <article class="col-lg-10 justify-content-center">
             <div class="col-4">
-                <img src="<?= $logo ?>">
+                <img src="<?= $data['logo'] ?>">
             </div>
             <div class="col-lg-6">
-                <h3><?= $description ?></h3>
+                <h3><?= $data['description'] ?></h3>
             </div>
-            <a href="index.php?access!actorView&amp;id=<?= $actorId ?>"><p class="lead">Lire la suite</p></a>
-            ?php
+            <a href="index.php?access!actorView&amp;id=<?= $data['actor_id'] ?>"><p class="lead">Lire la suite</p></a>
+            <php
             }
-            $partner->closeCursor();
-        ?> *\
+            $getActor->closeCursor();
+            ?>
         </article>
         <div class="col-lg-12">
             <!-- Uncomment when  separator are find.  <img src=""> !-->
