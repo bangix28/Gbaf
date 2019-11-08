@@ -42,7 +42,10 @@ class Router
                         }
                     break;
                 case 'home':
+
+                    $this->actorController->listActor();
                     require 'View/Frontend/homeView.php';
+
                     break;
                 case 'register':
                     if (!empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['name']) && !empty($_POST['lastname']) && !empty($_POST['question']) && !empty($_POST['answer'])) {
