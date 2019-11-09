@@ -28,16 +28,48 @@ class ActorManager
      */
     public function getActors()
     {
-        $getActors = $this->manager->dbConnect()->query('SELECT actor_id, name, logo, title, description FROM actor ORDER BY actor_id DESC LIMIT 0, 6');
-        return $getActors;
+         $listActors = $this->manager->dbConnect()->query('SELECT actor_id, name, logo, link, description FROM actor ORDER BY actor_id DESC LIMIT 0, 6');
+         return $listActors;
     }
 
     /**
      *
      */
-    public function addCreator()
+    public function addactor()
     {
-        $req = $this->manager->dbConnect()->prepare('INSERT INTO actor (name, logo, title, description) VALUES (?, ?, ?, ?,)');
-        $req->execute(array($_POST['name'],$_POST['logo'], $_POST['title'],$_POST['description']));
+        $logo = htmlspecialchars($_FILES['logo']['name']);
+        $req = $this->manager->dbConnect()->prepare('INSERT INTO actor (name, logo, link, description) VALUES (?,?,?,?)');
+        $req->execute(array($_POST['name'],$logo,$_POST['link'],$_POST['description']));
+    }
+
+    /**
+     * @return bool
+     */
+    public function imageVerification()
+    {
+        if ($_FILES['logo']['size'] <= 1000000)
+        {
+            $infosfiles = pathinfo($_FILES['logo']['name']);
+            $uploadExtension = $infosfiles['extension'];
+            $authorizedExtension = array('jpg', 'jpeg', 'gif', 'png');
+            if (in_array($uploadExtension, $authorizedExtension))
+            {
+                move_uploaded_file($_FILES['logo']['tmp_name'],'images/upload_images/' . basename($_FILES['logo']['name']));
+                echo "L'envoi a bien été effectué !";
+                return $upload = true;
+            }
+
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function actorNameVerification()
+    {
+        $req = $this->manager->dbConnect()->prepare('SELECT EXISTS(SELECT name FROM actor WHERE name = ?) AS name_exist');
+        $req->execute(array($_POST['name']));
+        $actorName = $req->fetchColumn();
+        return $actorName;
     }
 }
