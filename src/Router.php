@@ -4,6 +4,7 @@ namespace App;
 use App\Controller;
 use App\Controller\UserController;
 use App\Controller\ActorController;
+use App\Controller\CommentController;
 use Exception;
 
 
@@ -18,6 +19,9 @@ class Router
      * @var Controller\UserController
      */
     private $userController = null;
+    /**
+     * @var ActorController|null
+     */
     private $actorController = null;
 
     /**
@@ -27,6 +31,7 @@ class Router
     {
         $this->userController = new UserController();
         $this->actorController = new  ActorController();
+        $this->commentController = new CommentController();
     }
 
     /**
@@ -42,8 +47,7 @@ class Router
                         }
                     break;
                 case 'home':
-
-                    $this->actorController->listActor();
+                    var_dump($this->actorController->listActor()) ;
                     require 'View/Frontend/homeView.php';
 
                     break;
