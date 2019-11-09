@@ -28,8 +28,8 @@ class ActorManager
      */
     public function getActors()
     {
-        $getActors = $this->manager->dbConnect()->query('SELECT actor_id, name, logo, title, description FROM actor ORDER BY actor_id DESC LIMIT 0, 6');
-        return $getActors;
+         $listActors = $this->manager->dbConnect()->query('SELECT actor_id, name, logo, link, description FROM actor ORDER BY actor_id DESC LIMIT 0, 6');
+         return $listActors;
     }
 
     /**
@@ -42,6 +42,9 @@ class ActorManager
         $req->execute(array($_POST['name'],$logo,$_POST['link'],$_POST['description']));
     }
 
+    /**
+     * @return bool
+     */
     public function imageVerification()
     {
         if ($_FILES['logo']['size'] <= 1000000)
@@ -59,6 +62,9 @@ class ActorManager
         }
     }
 
+    /**
+     * @return mixed
+     */
     public function actorNameVerification()
     {
         $req = $this->manager->dbConnect()->prepare('SELECT EXISTS(SELECT name FROM actor WHERE name = ?) AS name_exist');
