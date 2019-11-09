@@ -27,7 +27,10 @@ class ActorController
      */
     public function listActor()
     {
-       $this->actorManager->getActors();
+        $listActors = $this->actorManager->getActors();
+        return $listActors;
+
+
     }
 
     /**
