@@ -53,6 +53,13 @@ class Router
                     }
                         require 'View/Frontend/userRegisterView.php';
                     break;
+                case 'addActor' :
+                    if (!empty($_POST['name']) && !empty($_FILES['logo']) &&!empty($_POST['link']) && !empty($_POST['description']))
+                    {
+                        $this->actorController->addActor();
+                    }
+                    require  'View/Backend/addActorView.php';
+                    break;
                     default:
                         require 'View/Frontend/userConnectView.php';
             }
