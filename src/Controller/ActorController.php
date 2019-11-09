@@ -33,8 +33,16 @@ class ActorController
     /**
      *
      */
-    public function addCreator()
+    public function addActor()
     {
-        $this->actorManager->addCreator();
+        $actorName = $this->actorManager->actorNameVerification();
+        if ($actorName == 0 ) {
+            $this->actorManager->imageVerification();
+            if ($upload = true) {
+                $this->actorManager->addActor();
+            }
+        }else {
+            throw new \Exception('Ce nom existe déja !');
+        }
     }
 }
