@@ -6,6 +6,7 @@ use App\Controller\UserController;
 use App\Controller\ActorController;
 use App\Controller\CommentController;
 use Exception;
+use function Composer\Autoload\includeFile;
 
 
 /**
@@ -48,14 +49,13 @@ class Router
                     break;
                 case 'home':
                     var_dump($this->actorController->listActor()) ;
-                    require 'View/Frontend/homeView.php';
+                    include_once 'View/Frontend/homeView.php';
 
                     break;
                 case 'register':
                     if (!empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['name']) && !empty($_POST['lastname']) && !empty($_POST['question']) && !empty($_POST['answer'])) {
                         $this->userController->register();
                     }
-                        require 'View/Frontend/userRegisterView.php';
                     break;
                 case 'addActor' :
                     if (!empty($_POST['name']) && !empty($_FILES['logo']) &&!empty($_POST['link']) && !empty($_POST['description']))
@@ -64,8 +64,11 @@ class Router
                     }
                     require  'View/Backend/addActorView.php';
                     break;
+                case 'actor' :
+                    require 'View/Frontend/actorView.php';
+                    break;
                     default:
-                        require 'View/Frontend/userConnectView.php';
+                        include_once'View/Frontend/userConnectView.php';
             }
 
 
