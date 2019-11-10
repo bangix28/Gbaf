@@ -21,10 +21,8 @@
     </section>
     <section class="container">
 
-         <php
-         while ($data = $getActor->fetch())
-
-        {
+         <?php
+         while ($data = $listActors->fetch()) {
           ?>
 
         <article class="col-lg-10 justify-content-center">
@@ -32,12 +30,12 @@
                 <img src="<?= $data['logo'] ?>">
             </div>
             <div class="col-lg-6">
-                <h3><?= $data['description'] ?></h3>
+                <h3><a href="<?= $data['link'] ?>"></a><?= $data['description'] ?></h3>
             </div>
             <a href="index.php?access!actorView&amp;id=<?= $data['actor_id'] ?>"><p class="lead">Lire la suite</p></a>
-            <php
+            <?php
             }
-            $getActor->closeCursor();
+            $listActors->closeCursor();
             ?>
         </article>
         <div class="col-lg-12">
