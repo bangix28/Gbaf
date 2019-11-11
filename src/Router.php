@@ -47,33 +47,34 @@ class Router
     public function run()
     {
         try {
-            switch ($_GET['access']) {
-                case 'connect':
-                    if (!empty($_POST['username']) && !empty($_POST['password'])) {
-                        $this->userController->connect();
-                        }
-                    break;
+            if (isset($_GET['access']) && !empty($_GET['access'])) {
+                $access = $_GET['access'];
+            }
+            else {
+                $access = 'connect';
+            }
+
+            switch ($access) {
                 case 'home':
-                        $this->homeController->listActor() ;
+                       $response = $this->homeController->listActor() ;
                     break;
                 case 'register':
-                    if (!empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['name']) && !empty($_POST['lastname']) && !empty($_POST['question']) && !empty($_POST['answer'])) {
-                        $this->userController->register();
-                    }
+
+                       $response = $this->userController->register();
+
                     break;
                 case 'addActor' :
-                    if (!empty($_POST['name']) && !empty($_FILES['logo']) &&!empty($_POST['link']) && !empty($_POST['description']))
-                    {
-                        $this->actorController->addActor();
-                    }
-                    require 'View/Backend/addActorView.twig';
+                       $response = $this->actorController->addActor();
                     break;
                 case 'actor' :
-                    require 'View/Frontend/actorView.twig';
+                       $response = $this->actorController->getActor();
                     break;
-                    default:
-                        include_once 'View/Frontend/userConnectView.twig';
+                case 'connect' :
+                       $response = $this->userController->connect();
+
+
             }
+            echo filter_var($response);
 
 
         }
