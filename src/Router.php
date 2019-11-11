@@ -70,7 +70,10 @@ class Router
                        $response = $this->userController->connect();
                        break;
                 case 'disconnect':
-                    $response =$this->userController->disconnect();
+                    $response = $this->userController->disconnect();
+                    break;
+                case 'addComment':
+                    $response = $this->commentController->addComment();
                     break;
             }
             echo filter_var($response);
