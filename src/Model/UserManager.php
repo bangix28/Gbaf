@@ -34,10 +34,11 @@ class UserManager
      */
     public function userRegister()
     {
+        $image = 'images/utilisateur.png';
         $pass_hach = password_hash($_POST['password'], PASSWORD_DEFAULT);
-        $user = $this->manager->dbConnect()->prepare('INSERT INTO user (username, password, name, lastname, question, answer) VALUES(?,?,?,?,?,?)');
+        $user = $this->manager->dbConnect()->prepare('INSERT INTO user (username, password, name, lastname, question, answer, image) VALUES(?,?,?,?,?,?,?)');
         ;
-        $user->execute(array($_POST['username'], $pass_hach, $_POST['name'], $_POST['lastname'], $_POST['question'], $_POST['answer']));
+        $user->execute(array($_POST['username'], $pass_hach, $_POST['name'], $_POST['lastname'], $_POST['question'], $_POST['answer'], $image));
 
     }
 
@@ -46,19 +47,21 @@ class UserManager
      */
     public function userConnect()
     {
-        $resultat = $this->manager->dbConnect()->prepare('SELECT * FROM user WHERE username = ?');
+        $resultat = $this->manager->dbConnect()->prepare('SELECT id_user, username, password FROM user WHERE username = ?');
         $resultat->execute(array($_POST['username']));
-        if ($resultat == true)
-        {$user = $resultat->fetch();
-            $password = password_verify($_POST['password'], $user['password']);
-            if ($password == true)
-            {
-                $_SESSION['id'] = $user['id'];
-                header('Location:index.php?action=home');
-            }else{
-                throw new Exception('Mauvais identifiant');
-            }
+        if ($resultat == true) {
+            $user = $resultat->fetch();
+            return $user;
         }
-
     }
+
+    public function getUser()
+    {
+        $userId = $_SESSION['id'];
+        $req = $this->manager->dbConnect()->prepare('SELECT * FROM user WHERE id_user = ?');
+        $req->execute(array($userId));
+        $user = $req->fetch();
+        return $user;
+    }
+
 }
