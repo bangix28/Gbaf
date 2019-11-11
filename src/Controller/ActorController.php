@@ -25,17 +25,6 @@ class ActorController
     /**
      *
      */
-    public function listActor()
-    {
-        $listActors = $this->actorManager->getActors();
-        return $listActors;
-
-
-    }
-
-    /**
-     *
-     */
     public function addActor()
     {
         $actorName = $this->actorManager->actorNameVerification();
@@ -48,4 +37,24 @@ class ActorController
             throw new \Exception('Ce nom existe déja !');
         }
     }
+
+    public function getComments()
+    {
+        $getcomment = $this->actorManager->getComments();
+        return $getcomment;
+    }
+     public function getLike()
+    {
+        $this->commentManager->getLike();
+    }
+
+    public function addLike()
+    {
+        $req = $this->commentManager->getLike();
+        $like = $req->fetch();
+        $addlike = $like['actor_like'];
+        $addlike++;
+        $this->commentManager->addLike($addlike);
+    }
+
 }
