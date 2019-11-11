@@ -28,15 +28,20 @@ class ActorController extends MainController
      */
     public function addActor()
     {
-        $actorName = $this->actorManager->actorNameVerification();
-        if ($actorName == 0 ) {
-            $this->actorManager->imageVerification();
-            if ($upload = true) {
-                $this->actorManager->addActor();
+        if (!empty($_POST['name']) && !empty($_FILES['logo']) &&!empty($_POST['link']) && !empty($_POST['description']))
+        {
+            $actorName = $this->actorManager->actorNameVerification();
+            if ($actorName == 0 ) {
+                $this->actorManager->imageVerification();
+                if ($upload = true) {
+                    $this->actorManager->addActor();
+                }
+            }else {
+                throw new \Exception('Ce nom existe déja !');
             }
-        }else {
-            throw new \Exception('Ce nom existe déja !');
         }
+        return $this->render('Backend/addActorView.twig');
+
     }
 
     public function getComments()
@@ -56,6 +61,11 @@ class ActorController extends MainController
         $addlike = $like['actor_like'];
         $addlike++;
         $this->commentManager->addLike($addlike);
+    }
+
+    public function getActor()
+    {
+         return $this->render('Frontend/actorView.twig');
     }
 
 }

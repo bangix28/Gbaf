@@ -21,6 +21,7 @@ class UserController extends MainController
      */
     public function __construct()
     {
+        parent::__construct();
         $this->userManager = new UserManager();
     }
 
@@ -29,8 +30,10 @@ class UserController extends MainController
      */
     public function connect()
     {
-        parent::__construct();
-        $this->userManager->userConnect();
+        if (!empty($_POST['username']) && !empty($_POST['password'])) {
+            $this->userManager->userConnect();
+        }
+        return $this->render('Frontend/userConnectView.twig');
     }
 
     /**
@@ -38,11 +41,15 @@ class UserController extends MainController
      */
     public function register()
     {
-        $user = $this->userManager->testUsername();
-        if ($user == 0) {
-            $this->userManager->userRegister();
-        } else {
-            throw new Exception('ce pseudo existe déja !');
+        if (!empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['name']) && !empty($_POST['lastname']) && !empty($_POST['question']) && !empty($_POST['answer'])) {
+                $user = $this->userManager->testUsername();
+                if ($user == 0) {
+                    $this->userManager->userRegister();
+                } else {
+                    throw new Exception('ce pseudo existe déja !');
+                }
+            }
+        return $this->render('Frontend/userRegisterView.twig');
         }
-    }
+
 }

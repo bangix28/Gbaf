@@ -41,7 +41,7 @@ class HomeController extends MainController
     {
         $listActors = $this->actorManager->getActors();
 
-        echo $this->render('Frontend/homeView.twig', ['listActors' => $listActors, 'session' => $_SESSION['id']]);
+        return $this->render('Frontend/homeView.twig', ['listActors' => $listActors, 'session' => $_SESSION['id']]);
 
     }
 
