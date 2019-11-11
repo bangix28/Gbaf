@@ -7,7 +7,7 @@ use App\Model\ActorManager;
  * Class ActorController
  * @package App\Controller
  */
-class ActorController
+class ActorController extends MainController
 {
     /**
      * @var ActorManager|null
@@ -19,6 +19,7 @@ class ActorController
      */
     public function __construct()
     {
+        parent::__construct();
         $this->actorManager = new ActorManager();
     }
 

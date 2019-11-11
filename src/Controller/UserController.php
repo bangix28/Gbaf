@@ -9,7 +9,7 @@ use Exception;
  * Class UserController
  * @package App\Controller
  */
-class UserController
+class UserController extends MainController
 {
     /**
      * @var UserManager|null
@@ -29,6 +29,7 @@ class UserController
      */
     public function connect()
     {
+        parent::__construct();
         $this->userManager->userConnect();
     }
 
