@@ -5,6 +5,7 @@ use App\Controller;
 use App\Controller\UserController;
 use App\Controller\ActorController;
 use App\Controller\CommentController;
+use App\Controller\HomeController;
 use Exception;
 use function Composer\Autoload\includeFile;
 
@@ -25,6 +26,10 @@ class Router
      */
     private $actorController = null;
 
+    private $commentController = null;
+
+    private  $homeController = null;
+
     /**
      * UserController constructor.
      */
@@ -33,6 +38,7 @@ class Router
         $this->userController = new UserController();
         $this->actorController = new  ActorController();
         $this->commentController = new CommentController();
+        $this->homeController = new  HomeController();
     }
 
     /**
@@ -48,9 +54,7 @@ class Router
                         }
                     break;
                 case 'home':
-                    var_dump($this->actorController->listActor()) ;
-                    include_once 'View/Frontend/homeView.php';
-
+                        $this->homeController->listActor() ;
                     break;
                 case 'register':
                     if (!empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['name']) && !empty($_POST['lastname']) && !empty($_POST['question']) && !empty($_POST['answer'])) {
@@ -62,20 +66,20 @@ class Router
                     {
                         $this->actorController->addActor();
                     }
-                    require  'View/Backend/addActorView.php';
+                    require 'View/Backend/addActorView.twig';
                     break;
                 case 'actor' :
-                    require 'View/Frontend/actorView.php';
+                    require 'View/Frontend/actorView.twig';
                     break;
                     default:
-                        include_once'View/Frontend/userConnectView.php';
+                        include_once 'View/Frontend/userConnectView.twig';
             }
 
 
         }
         catch(Exception $e) {
             echo 'Erreur : ' . $e->getMessage();
-            require('View/Backend/ErrorView.php');
+            require('View/Backend/ErrorView.twig');
         }
     }
 }
