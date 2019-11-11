@@ -4,12 +4,13 @@ namespace App\Controller;
 
 use App\Model\UserManager;
 use Exception;
+use http\Header;
 
 /**
  * Class UserController
  * @package App\Controller
  */
-class UserController
+class UserController extends MainController
 {
     /**
      * @var UserManager|null
@@ -21,6 +22,7 @@ class UserController
      */
     public function __construct()
     {
+        parent::__construct();
         $this->userManager = new UserManager();
     }
 
@@ -29,7 +31,17 @@ class UserController
      */
     public function connect()
     {
-        $this->userManager->userConnect();
+        if (!empty($_POST['username']) && !empty($_POST['password'])) {
+             $user = $this->userManager->userConnect();
+            if (password_verify($_POST['password'], $user['password'])) {
+                $_SESSION['id'] = $user['id_user'];
+              header('Location:index.php?access=home');
+            } else {
+                $message = 'Mauvais identifiant';
+                return $this->render('Frontend/userConnectView.twig', ['message' => $message]);
+            }
+        }
+        return $this->render('Frontend/userConnectView.twig');
     }
 
     /**
@@ -37,11 +49,22 @@ class UserController
      */
     public function register()
     {
-        $user = $this->userManager->testUsername();
-        if ($user == 0) {
-            $this->userManager->userRegister();
-        } else {
-            throw new Exception('ce pseudo existe déja !');
+        if (!empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['name']) && !empty($_POST['lastname']) && !empty($_POST['question']) && !empty($_POST['answer'])) {
+                $user = $this->userManager->testUsername();
+                if ($user == 0) {
+                    $this->userManager->userRegister();
+                } else {
+                    $message = 'ce pseudo existe déja !';
+                    return $this->render('Frontend/userRegisterView.twig', ['message' => $message]);
+                }
+            }
+        return $this->render('Frontend/userRegisterView.twig');
         }
-    }
+
+        public function disconnect()
+        {
+            session_destroy();
+            header('Location:index.php?access=connect');
+        }
+
 }

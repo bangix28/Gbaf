@@ -1,6 +1,8 @@
-<?php $title = 'Acteur'; ?>
-<?php ob_start(); ?>
-
+{% extends 'layout.twig' %}
+{% block head %}
+<title>pages des acteur du gbaf !</title>
+{% endblock %}
+{% block content %}
         <section class="container-fluid h-100  text-dark">
             <div class="row justify-content-center align-items-center">
                  <img src="?">
@@ -16,21 +18,16 @@
             <div class="row justify-content-center align-items-center">
                 <div class="offset-1 col-8 row">
                     <h2 class="col-lg-4">? de Commentaires</h2>
-                    <p class="offset-2 col-3"><a href="#">Nouveau commentaires</a></p>
+                    <p class="offset-2 col-3"><a href='index.php?access=addComment'>Nouveau commentaires</a></p>
                     <p>? <a href="#"><img href="#"></a> <a href="#"><img href="#"></a></p>
                 </div>
                 <div class="offset-3 col-9">
-                    <php while ($data = $comments->fetch());
-                    {
-                        ?>
+                    {% for data in comments %}
                         <p class="col-12">Prénom: ?</p>
-                        <p class="lead">Date: ?</p>
-                        <p class="lead">Commentaire: ?</p>
-                    <
-                    }
-                    ?>
+                        <p class="lead col-12">Date: ?</p>
+                        <p class="lead col-12">Commentaire: ?</p>
+                    {% endfor %}
                 </div>
             </div>
         </section>
-<?php $content = ob_get_clean(); ?>
-<?php require 'template.php'; ?>
+{% endblock %}

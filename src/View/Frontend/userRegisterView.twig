@@ -1,5 +1,8 @@
-<?php $title = 'Inscription'; ?>
-<?php ob_start(); ?>
+{% extends 'layout.twig' %}
+{% block head %}
+<title>Inscription au site !</title>
+{% endblock %}
+{% block content %}
 <form class="text-center form-control" action='' method="POST">
   <fieldset>
     <div id="legend">
@@ -50,7 +53,7 @@
               <!-- Answer-->
               <label class="control-label" for="answer">Réponse</label>
               <div class="controls">
-                  <textarea  requiredclass="input-xlarge" name="answer"></textarea>
+                  <textarea required class="input-xlarge" name="answer"></textarea>
               </div>
           </div>
       </div>
@@ -60,8 +63,10 @@
       <div class="controls">
         <button class="btn btn-success">Register</button>
       </div>
+        <div class="col-12">
+            <h2 class="text-center">{{ message }}</h2>
+        </div>
     </div>
   </fieldset>
 </form>
-<?php $content = ob_get_clean(); ?>
-<?php  require 'template.php'; ?>
+{% endblock %}

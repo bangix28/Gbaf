@@ -28,7 +28,8 @@ class ActorManager
      */
     public function getActors()
     {
-         $listActors = $this->manager->dbConnect()->query('SELECT actor_id, name, logo, link, description FROM actor ORDER BY actor_id DESC LIMIT 0, 6');
+         $listActors = $this->manager->dbConnect()->prepare('SELECT actor_id, name, logo, link, description FROM actor ORDER BY actor_id DESC LIMIT 0, 6');
+         $listActors->execute();
          return $listActors;
     }
 
@@ -72,4 +73,23 @@ class ActorManager
         $actorName = $req->fetchColumn();
         return $actorName;
     }
+
+    public function getActor()
+    {
+        $req = $this->manager->dbConnect()->prepare('SELECT ');
+    }
+
+    public function getLike()
+    {
+        $req = $this->manager->dbConnect()->prepare('SELECT like, dislike FROM actor WHERE actor_id = ?');
+        $req->execute(array($actorId));
+        return $req;
+    }
+
+    public function addLike()
+    {
+        $req = $this->manager->dbConnect()->prepare('UPDATE `actor` SET actor_like = ? ,actor_dislike = ? WHERE actor_id = ?');
+        $req->execute(array($_));
+    }
+
 }
