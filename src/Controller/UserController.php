@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Model\UserManager;
 use Exception;
+use http\Header;
 
 /**
  * Class UserController
@@ -31,7 +32,14 @@ class UserController extends MainController
     public function connect()
     {
         if (!empty($_POST['username']) && !empty($_POST['password'])) {
-            $this->userManager->userConnect();
+             $user = $this->userManager->userConnect();
+            if (password_verify($_POST['password'], $user['password'])) {
+                $_SESSION['id'] = $user['id_user'];
+              header('Location:index.php?access=home');
+            } else {
+                $message = 'Mauvais identifiant';
+                return $this->render('Frontend/userConnectView.twig', ['message' => $message]);
+            }
         }
         return $this->render('Frontend/userConnectView.twig');
     }
@@ -46,10 +54,17 @@ class UserController extends MainController
                 if ($user == 0) {
                     $this->userManager->userRegister();
                 } else {
-                    throw new Exception('ce pseudo existe déja !');
+                    $message = 'ce pseudo existe déja !';
+                    return $this->render('Frontend/userRegisterView.twig', ['message' => $message]);
                 }
             }
         return $this->render('Frontend/userRegisterView.twig');
+        }
+
+        public function disconnect()
+        {
+            session_destroy();
+            header('Location:index.php?access=connect');
         }
 
 }
