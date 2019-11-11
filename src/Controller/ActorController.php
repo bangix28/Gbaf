@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 use App\Model\ActorManager;
+use App\Model\UserManager;
+use App\Model\CommentManager;
 
 /**
  * Class ActorController
@@ -14,6 +16,9 @@ class ActorController extends MainController
      */
     private $actorManager = null;
 
+    private  $userManager = null;
+
+    private $commentManager = null;
     /**
      * ActorController constructor.
      */
@@ -21,6 +26,8 @@ class ActorController extends MainController
     {
         parent::__construct();
         $this->actorManager = new ActorManager();
+        $this->userManager = new UserManager();
+        $this->commentManager = new CommentManager();
     }
 
     /**
@@ -65,7 +72,9 @@ class ActorController extends MainController
 
     public function getActor()
     {
-         return $this->render('Frontend/actorView.twig');
+        $actorId = $_GET['id'];
+        $this->userManager->getUser();
+         return $this->render('Frontend/actorView.twig', ['actor' => $actor, 'actorId' => $actorId]);
     }
 
 }
