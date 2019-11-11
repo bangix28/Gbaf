@@ -1,0 +1,18 @@
+{% extends'layout.twig' %}
+{% block head %}
+<title>Ajouter un commentaire !</title>
+{% endblock %}
+{% block content %}
+        <form method="POST" action="" >
+            <div class="form-group">
+                <div class="form-group offset-4 col-5 text-center">
+                    <label for="comment" class="col-form-label">Commentaires</label>
+                    <textarea class="form-control" name="comment" cols="100"></textarea>
+
+                </div>
+                <div class="offset-6 col-4">
+                    <button class="btn btn-success">Register</button>
+                </div>
+
+    </form>
+{% endblock %}
