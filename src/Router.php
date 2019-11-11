@@ -7,7 +7,6 @@ use App\Controller\ActorController;
 use App\Controller\CommentController;
 use App\Controller\HomeController;
 use Exception;
-use function Composer\Autoload\includeFile;
 
 
 /**
@@ -59,9 +58,7 @@ class Router
                        $response = $this->homeController->listActor() ;
                     break;
                 case 'register':
-
                        $response = $this->userController->register();
-
                     break;
                 case 'addActor' :
                        $response = $this->actorController->addActor();
@@ -71,8 +68,10 @@ class Router
                     break;
                 case 'connect' :
                        $response = $this->userController->connect();
-
-
+                       break;
+                case 'disconnect':
+                    $response =$this->userController->disconnect();
+                    break;
             }
             echo filter_var($response);
 

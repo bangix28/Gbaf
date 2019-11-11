@@ -1,0 +1,14 @@
+{% block content %}
+<div class="col-12">
+<div class="row">
+    <div class="col-lg-3">
+        <img src="images/logo.png" style="max-width: 50px;">
+    </div>
+    <div class=" offset-7 col-lg-2 text-center row">
+        <img src="{{ user.image }}" style="max-width: 75px">
+        <p class="lead">{{ user.name }} {{ user.lastname }}</p>
+    </div>
+    <div class="offset-10 col-2"><a href="index.php?access=disconnect">déconection</a></div>
+</div>
+</div>
+{% endblock %}
