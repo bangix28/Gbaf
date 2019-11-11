@@ -4,6 +4,7 @@
 namespace App\Controller;
 use App\Model\ActorManager;
 use App\Model\CommentManager;
+use App\Model\UserManager;
 
 /**
  * Class HomeController
@@ -22,6 +23,8 @@ class HomeController extends MainController
      */
     private  $actorManager = null;
 
+    private $userManager = null;
+
     /**
      * HomeController constructor.
      */
@@ -30,6 +33,7 @@ class HomeController extends MainController
         parent::__construct();
         $this->commentManager = new CommentManager();
         $this->actorManager = new ActorManager();
+        $this->userManager = new UserManager();
     }
 
     /**
@@ -39,9 +43,9 @@ class HomeController extends MainController
      */
     public function listActor()
     {
+        $user = $this->userManager->getUser();
         $listActors = $this->actorManager->getActors();
-
-        return $this->render('Frontend/homeView.twig', ['listActors' => $listActors, 'session' => $_SESSION['id']]);
+        return $this->render('Frontend/homeView.twig', ['listActors' => $listActors, 'user' => $user ]);
 
     }
 
