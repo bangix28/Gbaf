@@ -39,8 +39,9 @@ class UserSettings extends MainController
     public function userSettings()
     {
             $user = $this->userManager->getUser();
-            if (isset($_POST['password'], $_POST['name'], $_POST['lastname'], $_POST['question'], $_POST['answer'], $_FILES['image'])) {
-
+            if (isset($_POST['password'], $_POST['name'], $_POST['lastname'], $_POST['question'], $_POST['answer'])) {
+                $this->actorManager->imageVerification();
+                $this->userManager->editUser();
             }
            return $this->render('Backend/userSettingsView.twig', ['user' => $user]);
     }
