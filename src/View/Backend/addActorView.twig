@@ -1,5 +1,8 @@
-<?php $title = 'Ajouter un acteur/partenaire !'; ?>
-<?php ob_start()    ?>
+{% extends 'layout.twig' %}
+{% block content %}
+    <header>
+    {{ include('Frontend/layout/header.twig') }}
+    </header>
     <h1 class="lead text-center"> Creation d'un acteur/partenaire !</h1>
 <section class="container-fluid h-100  text-dark">
     <div class="row justify-content-center align-items-center">
@@ -21,11 +24,10 @@
                 <textarea required class="form-control" name="description" ></textarea>
             </div>
             <button type="submit">Valider !</button>
-            <div class="text-center"
+            <div class="text-center">
                 <p class="col-10"><?php if (isset($message)) { echo $message; } ?></p>
             </div>
         </form>
     </div>
 </section>
-<?php $content = ob_get_clean() ?>
-<?php require 'template.php'; ?>
+{% endblock %}

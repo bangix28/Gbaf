@@ -3,6 +3,9 @@
 <title>Ajouter un commentaire !</title>
 {% endblock %}
 {% block content %}
+    <header>
+        {{ include('Frontend/layout/header.twig') }}
+    </header>
         <form method="POST" action="" >
             <div class="form-group">
                 <div class="form-group offset-4 col-5 text-center">

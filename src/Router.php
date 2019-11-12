@@ -6,6 +6,7 @@ use App\Controller\UserController;
 use App\Controller\ActorController;
 use App\Controller\CommentController;
 use App\Controller\HomeController;
+use App\Controller\UserSettings;
 use Exception;
 
 
@@ -29,6 +30,8 @@ class Router
 
     private  $homeController = null;
 
+    private  $userSettings = null;
+
     /**
      * UserController constructor.
      */
@@ -38,6 +41,7 @@ class Router
         $this->actorController = new  ActorController();
         $this->commentController = new CommentController();
         $this->homeController = new  HomeController();
+        $this->userSettings = new  UserSettings();
     }
 
     /**
@@ -74,6 +78,9 @@ class Router
                     break;
                 case 'addComment':
                     $response = $this->commentController->addComment();
+                    break;
+                case 'userSettings':
+                    $response = $this->userSettings->userSettings();
                     break;
             }
             echo filter_var($response);

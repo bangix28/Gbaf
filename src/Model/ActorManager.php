@@ -33,6 +33,13 @@ class ActorManager
          return $listActors;
     }
 
+    public function getActor()
+    {
+        $actor = $this->manager->dbConnect()->prepare('SELECT * FROM actor WHERE actor_id = ? ');
+        $actor->execute(array($_GET['id']));
+        return $actor;
+    }
+
     /**
      *
      */
@@ -74,22 +81,25 @@ class ActorManager
         return $actorName;
     }
 
-    public function getActor()
-    {
-        $req = $this->manager->dbConnect()->prepare('SELECT ');
-    }
-
     public function getLike()
     {
-        $req = $this->manager->dbConnect()->prepare('SELECT like, dislike FROM actor WHERE actor_id = ?');
-        $req->execute(array($actorId));
+        $req = $this->manager->dbConnect()->prepare('SELECT actor_like, actor_dislike FROM actor WHERE actor_id = ?');
+        $req->execute(array($actor_id));
         return $req;
     }
 
     public function addLike()
     {
-        $req = $this->manager->dbConnect()->prepare('UPDATE `actor` SET actor_like = ? ,actor_dislike = ? WHERE actor_id = ?');
-        $req->execute(array($_));
+        $addLike = 1 +$like;
+        $req = $this->manager->dbConnect()->prepare('UPDATE actor SET actor_like = ?  WHERE actor_id = ?');
+        $req->execute(array($addLike));
+    }
+
+    public function addDislike()
+    {
+        $addDislike = 1 + $dislike;
+        $req = $this->manager->dbConnect()->prepare('UPDATE actor SET actor_dislike = ? WHERE actor_id = ?');
+        $req->execute(array($addDislike));
     }
 
 }
