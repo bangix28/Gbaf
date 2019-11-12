@@ -16,12 +16,15 @@
             </div>
 
         </section>
-        <section class="container-fluid h-100  text-dark">
-            <div class="row justify-content-center align-items-center">
+        <section class="col align-self-center container-fluid h-100  text-dark">
+            <div class="border border-dark row justify-content-center align-items-center">
                 <div class="offset-1 col-8 row">
                     <h2 class="col-lg-4">{{ nbrComment }} de Commentaires</h2>
-                    <p class="offset-2 col-3"><a href="index.php?access=addComment&amp;id={{ actor.actor_id }}">Nouveau commentaires</a></p>
-                    <p>? <a href="#"><img href="#"></a> <a href="#"><img href="#"></a></p>
+                   <div class="offset-2 col-3">
+                       <button type="submit" class="btn btn-success"href="index.php?access=addComment&amp;id={{ actor.actor_id }}">Nouveau<br> commentaires</button>
+                   </div>
+
+                    <p>{{ actor.actor_like }} <a href="#"><img src="images/like.png" style="max-width: 25px;"></a> <a href="#"><img src="images/dislike.png" style="max-width: 35px"></a>{{ actor.actor_like }}</p>
                 </div>
     {% endfor %}
     {% for data in comment %}

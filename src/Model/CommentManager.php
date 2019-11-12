@@ -21,10 +21,10 @@ class CommentManager
         return $req;
     }
 
-    public function getLike()
+    public function getLike($actor_id)
     {
-        $req = $this->manager->dbConnect()->prepare('SELECT like, dislike FROM actor WHERE actor_id = ?');
-        $req->execute(array($actorId));
+        $req = $this->manager->dbConnect()->prepare('SELECT actor_like, actor_dislike FROM actor WHERE actor_id = ?');
+        $req->execute(array($actor_id));
         return $req;
     }
 

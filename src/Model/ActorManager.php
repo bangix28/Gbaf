@@ -35,7 +35,7 @@ class ActorManager
 
     public function getActor()
     {
-        $actor = $this->manager->dbConnect()->prepare('SELECT actor_id, name, logo, link, description FROM actor WHERE actor_id = ? ');
+        $actor = $this->manager->dbConnect()->prepare('SELECT * FROM actor WHERE actor_id = ? ');
         $actor->execute(array($_GET['id']));
         return $actor;
     }
