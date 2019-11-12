@@ -3,31 +3,35 @@
 <title>pages des acteur du gbaf !</title>
 {% endblock %}
 {% block content %}
+    {% for actor in actor %}
         <section class="container-fluid h-100  text-dark">
             <div class="row justify-content-center align-items-center">
-                 <img src="?">
+                 <img src="images/upload_images/{{ actor.logo }}">
             </div>
             <div class="offset-2 col-10 p-3">
-                <h2 class="lead"><a href="?">?</a></h2>
+                <h2 class="lead"><a href="{{ actor.link }}">{{ actor.link }}</a></h2>
             </div>
             <div class="offset-2 col-10">
-                <p class="lead p-5"> LOREUM ipseum</p>
+                <p class="lead p-5"> {{ actor.description }}</p>
             </div>
+
         </section>
         <section class="container-fluid h-100  text-dark">
             <div class="row justify-content-center align-items-center">
                 <div class="offset-1 col-8 row">
-                    <h2 class="col-lg-4">? de Commentaires</h2>
-                    <p class="offset-2 col-3"><a href='index.php?access=addComment'>Nouveau commentaires</a></p>
+                    <h2 class="col-lg-4">{{ nbrComment }} de Commentaires</h2>
+                    <p class="offset-2 col-3"><a href="index.php?access=addComment&amp;id={{ actor.actor_id }}">Nouveau commentaires</a></p>
                     <p>? <a href="#"><img href="#"></a> <a href="#"><img href="#"></a></p>
                 </div>
-                <div class="offset-3 col-9">
-                    {% for data in comments %}
-                        <p class="col-12">Prénom: ?</p>
-                        <p class="lead col-12">Date: ?</p>
-                        <p class="lead col-12">Commentaire: ?</p>
-                    {% endfor %}
+    {% endfor %}
+    {% for data in comment %}
+                <div class="offset-3 col-9 p-4">
+                        <p class="col-12">Prénom: {{ data.author }}</p>
+                        <p class="lead col-12">Date: {{ data.comment_date_fr }} </p>
+                        <p class="lead col-12">Commentaire: {{ data.comment }}</p>
+
                 </div>
+    {% endfor %}
             </div>
         </section>
 {% endblock %}
