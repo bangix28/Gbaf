@@ -38,7 +38,7 @@ class CommentManager
     {
        $req = $this->manager->dbConnect()->prepare('SELECT count(*) FROM comment WHERE actor_id = ?');
        $req->execute($_GET['id']);
-       $nbrComment = $req->fetch();
+       $nbrComment = count($req);
         return $nbrComment;
     }
 }
