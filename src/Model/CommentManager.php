@@ -21,13 +21,6 @@ class CommentManager
         return $req;
     }
 
-    public function getLike($actor_id)
-    {
-        $req = $this->manager->dbConnect()->prepare('SELECT actor_like, actor_dislike FROM actor WHERE actor_id = ?');
-        $req->execute(array($actor_id));
-        return $req;
-    }
-
     public function addComment($author)
     {
         $req = $this->manager->dbConnect()->prepare('INSERT INTO comment(actor_id, comment_date, author, comment) VALUES (?,now(),?,?)');

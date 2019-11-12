@@ -2,7 +2,11 @@
 {% block head %}
 <title>pages des acteur du gbaf !</title>
 {% endblock %}
+
 {% block content %}
+    <header>
+        {{ include('Frontend/layout/header.twig') }}
+    </header>
     {% for actor in actor %}
         <section class="container-fluid h-100  text-dark">
             <div class="row justify-content-center align-items-center">
@@ -21,13 +25,13 @@
                 <div class="offset-1 col-8 row">
                     <h2 class="col-lg-4">{{ nbrComment }} Commentaires</h2>
                    <div class="offset-2 col-3">
-                       <button type="submit" class="btn btn-success"href="index.php?access=addComment&amp;id={{ actor.actor_id }}">Nouveau<br> commentaires</button>
+                       <a class="btn btn-success" href="index.php?access=addComment&amp;id={{ actor.actor_id }}">Nouveau<br> commentaires</a>
                    </div>
-                    <form method="post" action="index.php?actor&amp;vote=1">
-                         <button>{{ actor.actor_like }}<i class="far fa-thumbs-up"> </i></button>
+                    <form method="post" action="index.php?access=actor&amp;vote=1&amp;id={{ actor.actor_id }}">
+                         <button class="rounded">{{ actor.actor_like }}<i class="far fa-thumbs-up"> </i></button>
                     </form>
-                    <form method="post" action="index.php?actor&amp;vote=-1">
-                        <button><i class="far fa-thumbs-down"></i> {{ actor.actor_dislike }}</button>
+                    <form method="post" action="index.php?access=actor&amp;vote=-1&amp;id={{ actor.actor_id }}">
+                        <button class="rounded"><i class="far fa-thumbs-down"></i> {{ actor.actor_dislike }}</button>
                 </form>
                 </div>
     {% endfor %}

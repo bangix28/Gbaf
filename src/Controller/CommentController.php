@@ -27,15 +27,15 @@ class CommentController extends MainController
 
     public function addComment()
     {
+        $user = $this->userManager->getUser();
         $post = $this->actorManager->getActor();
         if (!empty($_POST['comment']))
         {
-            $user = $this->userManager->getUser();
             $author = $user['username'];
             $this->commentManager->addComment($author);
             header('Location:index.php?access=home');
         }
-        return $this->render('Frontend/addCommentView', ['post' => $post]);
+        return $this->render('Frontend/addCommentView', ['post' => $post, 'user' => $user]);
 
     }
 

@@ -35,6 +35,7 @@ class ActorController extends MainController
      */
     public function addActor()
     {
+        $user = $this->userManager->getUser();
         if (!empty($_POST['name']) && !empty($_FILES['logo']) &&!empty($_POST['link']) && !empty($_POST['description']))
         {
             $actorName = $this->actorManager->actorNameVerification();
@@ -47,7 +48,7 @@ class ActorController extends MainController
                 throw new \Exception('Ce nom existe déja !');
             }
         }
-        return $this->render('Backend/addActorView.twig');
+        return $this->render('Backend/addActorView.twig', ['user' => $user]);
 
     }
 
@@ -78,14 +79,12 @@ class ActorController extends MainController
         $actor_id = $_GET['id'];
         $nbrComment = 0 + $this->commentManager->getComments($actor_id)->fetchColumn();
         $comment = $this->commentManager->getComments($actor_id);
-        $like = $this->commentManager->getLike($actor_id);
 
          return $this->render('Frontend/actorView.twig', [
              'user' => $user,
              'actor' => $actor,
              'comment' => $comment,
-             'nbrComment' => $nbrComment,
-             'like' => $like]);
+             'nbrComment' => $nbrComment]);
     }
 
 
