@@ -64,4 +64,11 @@ class UserManager
         return $user;
     }
 
+    public function editUser()
+    {
+        $req = $this->manager->dbConnect()->prepare('UPDATE `user` SET password = ?, name = ?, lastname = ?, question = ?, answer = ?, image = ? WHERE id_user = ?');
+        $req->execute($_SESSION['id']);
+
+    }
+
 }
