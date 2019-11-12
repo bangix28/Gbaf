@@ -33,6 +33,13 @@ class ActorManager
          return $listActors;
     }
 
+    public function getActor()
+    {
+        $actor = $this->manager->dbConnect()->prepare('SELECT actor_id, name, logo, link, description FROM actor WHERE actor_id = ? ');
+        $actor->execute(array($_GET['id']));
+        return $actor;
+    }
+
     /**
      *
      */
@@ -72,11 +79,6 @@ class ActorManager
         $req->execute(array($_POST['name']));
         $actorName = $req->fetchColumn();
         return $actorName;
-    }
-
-    public function getActor()
-    {
-        $req = $this->manager->dbConnect()->prepare('SELECT ');
     }
 
     public function getLike()
