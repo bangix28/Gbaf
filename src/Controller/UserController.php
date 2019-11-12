@@ -67,4 +67,5 @@ class UserController extends MainController
             header('Location:index.php?access=connect');
         }
 
+
 }
