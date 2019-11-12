@@ -19,17 +19,21 @@
         <section class="col align-self-center container-fluid h-100  text-dark">
             <div class="border border-dark row justify-content-center align-items-center">
                 <div class="offset-1 col-8 row">
-                    <h2 class="col-lg-4">{{ nbrComment }} de Commentaires</h2>
+                    <h2 class="col-lg-4">{{ nbrComment }} Commentaires</h2>
                    <div class="offset-2 col-3">
                        <button type="submit" class="btn btn-success"href="index.php?access=addComment&amp;id={{ actor.actor_id }}">Nouveau<br> commentaires</button>
                    </div>
-
-                    <p>{{ actor.actor_like }} <a href="#"><img src="images/like.png" style="max-width: 25px;"></a> <a href="#"><img src="images/dislike.png" style="max-width: 35px"></a>{{ actor.actor_like }}</p>
+                    <form method="post" action="index.php?actor&amp;vote=1">
+                         <button>{{ actor.actor_like }}<i class="far fa-thumbs-up"> </i></button>
+                    </form>
+                    <form method="post" action="index.php?actor&amp;vote=-1">
+                        <button><i class="far fa-thumbs-down"></i> {{ actor.actor_dislike }}</button>
+                </form>
                 </div>
     {% endfor %}
     {% for data in comment %}
                 <div class="offset-3 col-9 p-4">
-                        <p class="col-12">Prénom: {{ data.author }}</p>
+                        <p class="lead col-12">pseudo: {{ data.author }}</p>
                         <p class="lead col-12">Date: {{ data.comment_date_fr }} </p>
                         <p class="lead col-12">Commentaire: {{ data.comment }}</p>
 
