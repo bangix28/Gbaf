@@ -37,7 +37,7 @@ class UserController extends MainController
                 $_SESSION['id'] = $user['id_user'];
               header('Location:index.php?access=home');
             } else {
-                $message = 'Mauvais identifiant';
+                $message = 'Mauvais identifiant ';
                 return $this->render('Frontend/userConnectView.twig', ['message' => $message]);
             }
         }
@@ -67,5 +67,26 @@ class UserController extends MainController
             header('Location:index.php?access=connect');
         }
 
+        public function recoverPassword()
+        {
+            if ($_POST['username'] && !empty($_POST['username'])){
+                 $user = $this->userManager->recoverPassword();
+                 if ($user == true) {
+                     if (isset($_POST['answer']) && !empty($_POST['answer']) && isset($_POST['password']) && !empty($_POST['password'])) {
+                         $userId = $user['id'];
+                         $this->userManager->changePassword($userId);
+                     } else {
+                             $message = 'Mauvaise réponse ou mot de passe vide!';
+                             return $this->render('Backend/answerView.twig', ['message' => $message, 'user' => $user]);
+                         }
+                     return $this->render('Backend/answerView.twig', ['user' => $user]);
+
+                 } else {
+                     $message = 'Pseudo inconnue';
+                    return $this->render('Backend/recoverPasswordView.twig', ['message' => $message, 'user' => $user]);
+                 }
+            }
+            return $this->render('Backend/recoverPasswordView.twig');
+        }
 
 }

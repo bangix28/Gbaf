@@ -34,7 +34,7 @@ class UserManager
      */
     public function userRegister()
     {
-        $image = 'images/utilisateur.png';
+        $image = 'utilisateur.png';
         $pass_hach = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $user = $this->manager->dbConnect()->prepare('INSERT INTO user (username, password, name, lastname, question, answer, image) VALUES(?,?,?,?,?,?,?)');
         ;
@@ -66,9 +66,28 @@ class UserManager
 
     public function editUser()
     {
-        $req = $this->manager->dbConnect()->prepare('UPDATE `user` SET password = ?, name = ?, lastname = ?, question = ?, answer = ?, image = ? WHERE id_user = ?');
-        $req->execute($_SESSION['id']);
+        $req = $this->manager->dbConnect()->prepare('UPDATE user SET  name = ? , lastname = ?, question = ?, answer = ? WHERE id_user = ?');
+        $req->execute(array( $_POST['name'],$_POST['lastname'],$_POST['question'], $_POST['answer'], $_SESSION['id']));
 
     }
+
+    public function changePassword($userId)
+    {
+        $pass_hach = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $req = $this->manager->dbConnect()->prepare('UPDATE user SET password = ?  WHERE  id_user = ?');
+        $req->execute(array($pass_hach, $userId));
+    }
+
+    public function recoverPassword()
+    {
+        $req = $this->manager->dbConnect()->prepare('SELECT id_user, username ,question, answer FROM user WHERE username = ?');
+        $req->execute(array($_POST['username']));
+        $user = $req->fetch();
+        return $user;
+    }
+
+
+
+
 
 }

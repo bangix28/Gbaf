@@ -6,7 +6,7 @@ use App\Controller\UserController;
 use App\Controller\ActorController;
 use App\Controller\CommentController;
 use App\Controller\HomeController;
-use App\Controller\UserSettings;
+use App\Controller\UserSettingsController;
 use Exception;
 
 
@@ -41,7 +41,7 @@ class Router
         $this->actorController = new  ActorController();
         $this->commentController = new CommentController();
         $this->homeController = new  HomeController();
-        $this->userSettings = new  UserSettings();
+        $this->userSettings = new  UserSettingsController();
     }
 
     /**
@@ -81,6 +81,9 @@ class Router
                     break;
                 case 'userSettings':
                     $response = $this->userSettings->userSettings();
+                    break;
+                case 'recoverPassword':
+                    $response = $this->userController->recoverPassword();
                     break;
             }
             echo filter_var($response);
