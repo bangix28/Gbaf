@@ -4,11 +4,16 @@
 {% endblock %}
 {% block content %}
     <form method="POST">
-        <div class="form-group">
             <div class="form-group offset-4 col-5 text-center">
                 <p class="lead">{{ username.question }}</p>
-                <label for="answer">Réponse</label>
-                <textarea  class="form-control" id="answer" name="answer"></textarea>
+                <div class="">
+                    <label for="answer">Réponse</label>
+                    <textarea  class="form-control" id="answer" name="answer"></textarea>
+                </div>
+                <div class="">
+                    <label class="" for="password">Password</label>
+                    <input class="form-control" id="password" name="password">
+                </div>
                 <div class="row">
                     <button type="submit" class="offset-5 col-2 p-2 btn btn-primary">Envoyer</button>
                 </div>
@@ -16,6 +21,5 @@
                     <p class="lead" style="color: red;">{{ message }}</p>
                 </div>
             </div>
-        </div>
     </form>
 {% endblock %}

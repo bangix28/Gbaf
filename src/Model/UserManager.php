@@ -71,11 +71,11 @@ class UserManager
 
     }
 
-    public function changePassword()
+    public function changePassword($userId)
     {
         $pass_hach = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $req = $this->manager->dbConnect()->prepare('UPDATE user SET password = ?  WHERE  id_user = ?');
-        $req->execute(array($pass_hach, $_SESSION['id']));
+        $req->execute(array($pass_hach, $userId));
     }
 
     public function recoverPassword()

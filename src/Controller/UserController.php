@@ -69,31 +69,24 @@ class UserController extends MainController
 
         public function recoverPassword()
         {
+            if ($_POST['username'] && !empty($_POST['username'])){
+                 $user = $this->userManager->recoverPassword();
+                 if ($user == true) {
+                     if (isset($_POST['answer']) && !empty($_POST['answer']) && isset($_POST['password']) && !empty($_POST['password'])) {
+                         $userId = $user['id'];
+                         $this->userManager->changePassword($userId);
+                     } else {
+                             $message = 'Mauvaise réponse ou mot de passe vide!';
+                             return $this->render('Backend/answerView.twig', ['message' => $message, 'user' => $user]);
+                         }
+                     return $this->render('Backend/answerView.twig', ['user' => $user]);
 
-            if (isset($_POST['username']) && !empty($_POST['username'])) {
-                $username = $this->userManager->recoverPassword();
-                if ($username == true) {
-                    if (isset($_POST['answer']) && !empty($_POST['answer'])) {
-                        $answerTest = $username['answer'] = $_POST['answer'];
-                        if ($answerTest == true) {
-                            if (isset($_POST['password']) && $_POST['password']) {
-                                $this->userManager->changePassword();
-                            } else {
-                                $message = 'mettre un mot de passe !';
-                                return $this->render('Backend/changePasswordView.twig', ['username' => $username,'message' => $message]);
-                            }
-                            return $this->render('Backend/changePasswordView.twig', ['username' => $username]);
-                        } else {
-                            $message = 'Mauvaise Reponse';
-                            return $this->render('Backend/answerView.twig', ['username' => $username, 'message' => $message] );
-                        }
-                    }
-                    return $this->render('Backend/answerView.twig', ['username' => $username]);
-                } else {
-                    $message = 'Mauvaise pseudo';
-                    return $this->render('Backend/recoverPasswordView.twig', ['username' => $username, 'message' => $message]);
-                }
+                 } else {
+                     $message = 'Pseudo inconnue';
+                    return $this->render('Backend/recoverPasswordView.twig', ['message' => $message, 'user' => $user]);
+                 }
             }
             return $this->render('Backend/recoverPasswordView.twig');
         }
+
 }
