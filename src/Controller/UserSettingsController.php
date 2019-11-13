@@ -14,7 +14,7 @@ use App\Model\CommentManager;
  * Class ActorController
  * @package App\Controller
  */
-class UserSettings extends MainController
+class UserSettingsController extends MainController
 {
     /**
      * @var ActorManager|null
@@ -39,10 +39,16 @@ class UserSettings extends MainController
     public function userSettings()
     {
             $user = $this->userManager->getUser();
-            if (isset($_POST['password'], $_POST['name'], $_POST['lastname'], $_POST['question'], $_POST['answer'])) {
-                $this->actorManager->imageVerification();
+            if (isset($_SESSION['id'], $_POST['name'], $_POST['lastname'], $_POST['question'], $_POST['answer']))
+            {
                 $this->userManager->editUser();
+
+                if (isset($_POST['password'])) {
+                    $this->userManager->changePassword();
+                }
+                header('location:index.php?access=home');
             }
            return $this->render('Backend/userSettingsView.twig', ['user' => $user]);
     }
+
 }

@@ -3,16 +3,13 @@
 <header>
     {{ include('Frontend/layout/header.twig') }}
 </header>
-    <form class="offset-2 p-3" action='' method="POST">
+    <form class="offset-2 p-3" method="POST">
 
             <div class="control-group">
                 <label class="control-label" for="name">nom</label>
                 <div class="controls">
                     <input type="text" required id="user_name" name="name" value="{{ user.name }}" class="input-xlarge">
                 </div>
-                <label class="control-label" for="image">Changer votre Avatar !</label><br>
-                <input type="file" name="image">
-            </div>
 
             <div class="control-group">
                 <!-- Lastname -->
@@ -26,7 +23,7 @@
                 <!-- Password-->
                 <label class="control-label" for="password">Password</label>
                 <div class="controls">
-                    <input type="password" required id="password"  name="password" class="input-xlarge">
+                    <input type="password"  id="password"  name="password" class="input-xlarge">
                 </div>
             </div>
             <div class="control-group">
