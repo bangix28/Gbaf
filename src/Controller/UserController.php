@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Model\UserManager;
 use Exception;
-use http\Header;
 
 /**
  * Class UserController
@@ -32,10 +31,10 @@ class UserController extends MainController
     public function connect()
     {
         if (!empty($_POST['username']) && !empty($_POST['password'])) {
-             $user = $this->userManager->userConnect();
+            $user = $this->userManager->userConnect();
             if (password_verify($_POST['password'], $user['password'])) {
                 $_SESSION['id'] = $user['id_user'];
-              header('Location:index.php?access=home');
+                header('Location:index.php?access=home');
             } else {
                 $message = 'Mauvais identifiant ';
                 return $this->render('Frontend/userConnectView.twig', ['message' => $message]);
@@ -50,43 +49,53 @@ class UserController extends MainController
     public function register()
     {
         if (!empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['name']) && !empty($_POST['lastname']) && !empty($_POST['question']) && !empty($_POST['answer'])) {
-                $user = $this->userManager->testUsername();
-                if ($user == 0) {
-                    $this->userManager->userRegister();
-                } else {
-                    $message = 'ce pseudo existe déja !';
-                    return $this->render('Frontend/userRegisterView.twig', ['message' => $message]);
-                }
+            $user = $this->userManager->testUsername();
+            if ($user == 0) {
+                $this->userManager->userRegister();
+                header('Location:index.php?access=connect');
+            } else {
+                $message = 'ce pseudo existe déja !';
+                return $this->render('Frontend/userRegisterView.twig', ['message' => $message]);
             }
+        }
         return $this->render('Frontend/userRegisterView.twig');
-        }
+    }
 
-        public function disconnect()
+    public function disconnect()
+    {
+        session_destroy();
+        header('Location:index.php?access=connect');
+    }
+
+    public function recoverPassword()
+    {
+       $user = $this->userManager->testUsername();
+       if ($user == true)
+       {
+           $answer = $this->userManager->recoverPassword();
+           $test = $_POST['answer'] === $answer['answer'];
+           if ($test === true) {
+               $userId = $user['id_user'];
+               $this->userManager->changePassword($userId);
+           }
+           return $this->render('Backend/answerView.twig', ['user' => $user ]);
+       }
+       return $this->render('Backend/recoverPasswordView.twig');
+    }
+
+    public function userSettings()
+    {
+        $user = $this->userManager->getUser();
+        if (isset($_SESSION['id'], $_POST['name'], $_POST['lastname'], $_POST['question'], $_POST['answer']))
         {
-            session_destroy();
-            header('Location:index.php?access=connect');
-        }
+            $this->userManager->editUser();
 
-        public function recoverPassword()
-        {
-            if ($_POST['username'] && !empty($_POST['username'])){
-                 $user = $this->userManager->recoverPassword();
-                 if ($user == true) {
-                     if (isset($_POST['answer']) && !empty($_POST['answer']) && isset($_POST['password']) && !empty($_POST['password'])) {
-                         $userId = $user['id'];
-                         $this->userManager->changePassword($userId);
-                     } else {
-                             $message = 'Mauvaise réponse ou mot de passe vide!';
-                             return $this->render('Backend/answerView.twig', ['message' => $message, 'user' => $user]);
-                         }
-                     return $this->render('Backend/answerView.twig', ['user' => $user]);
-
-                 } else {
-                     $message = 'Pseudo inconnue';
-                    return $this->render('Backend/recoverPasswordView.twig', ['message' => $message, 'user' => $user]);
-                 }
+            if (isset($_POST['password'])) {
+                $userId = $_SESSION['id'];
+                $this->userManager->changePassword($userId);
             }
-            return $this->render('Backend/recoverPasswordView.twig');
+            header('location:index.php?access=home');
         }
-
+        return $this->render('Backend/userSettingsView.twig', ['user' => $user]);
+    }
 }

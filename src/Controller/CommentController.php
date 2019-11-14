@@ -35,7 +35,7 @@ class CommentController extends MainController
             $this->commentManager->addComment($author);
             header('Location:index.php?access=home');
         }
-        return $this->render('Frontend/addCommentView', ['post' => $post, 'user' => $user]);
+        return $this->render('Frontend/addCommentView.twig', ['post' => $post, 'user' => $user]);
 
     }
 
