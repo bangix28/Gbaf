@@ -1,7 +1,7 @@
 {% extends 'layout.twig' %}
 {% block content %}
     <header>
-    {{ include('Frontend/layout/header.twig') }}
+    {{ include('layout/header.twig') }}
     </header>
     <h1 class="lead text-center"> Creation d'un acteur/partenaire !</h1>
 <section class="container-fluid h-100  text-dark">
@@ -18,6 +18,10 @@
             <div class="form-group">
                 <label class="control-label"  for="link">Lien du site de votre banque !</label >
                 <input type="text" required class="form-control" name="link">
+            </div>
+            <div class="form-group">
+                <label class="control-label"  for="tiny_desc">Courte déscription de l'acteur/partenaire !</label >
+                <textarea maxlength="200" required class="form-control" name="tiny_desc" ></textarea>
             </div>
             <div class="form-group">
                 <label class="control-label"  for="description">description de l'acteur/partenaire</label >

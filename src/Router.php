@@ -41,7 +41,6 @@ class Router
         $this->actorController = new  ActorController();
         $this->commentController = new CommentController();
         $this->homeController = new  HomeController();
-        $this->userSettings = new  UserSettingsController();
     }
 
     /**
@@ -80,14 +79,16 @@ class Router
                     $response = $this->commentController->addComment();
                     break;
                 case 'userSettings':
-                    $response = $this->userSettings->userSettings();
+                    $response = $this->userController->userSettings();
                     break;
                 case 'recoverPassword':
                     $response = $this->userController->recoverPassword();
                     break;
+                case 'like':
+                    $response = $this->actorController->addLike();
+                    break;
             }
             echo filter_var($response);
-
 
         }
         catch(Exception $e) {

@@ -28,14 +28,14 @@ class ActorManager
      */
     public function getActors()
     {
-         $listActors = $this->manager->dbConnect()->prepare('SELECT actor_id, name, logo, link, description FROM actor ORDER BY actor_id DESC LIMIT 0, 6');
+         $listActors = $this->manager->dbConnect()->prepare('SELECT actor_id, name, logo, link, description, tiny_desc FROM actor ORDER BY actor_id DESC LIMIT 0, 6');
          $listActors->execute();
          return $listActors;
     }
 
     public function getActor()
     {
-        $actor = $this->manager->dbConnect()->prepare('SELECT * FROM actor WHERE actor_id = ? ');
+        $actor = $this->manager->dbConnect()->prepare('SELECT * FROM actor WHERE actor_id = ?');
         $actor->execute(array($_GET['id']));
         return $actor;
     }
@@ -46,8 +46,8 @@ class ActorManager
     public function addactor()
     {
         $logo = htmlspecialchars($_FILES['logo']['name']);
-        $req = $this->manager->dbConnect()->prepare('INSERT INTO actor (name, logo, link, description) VALUES (?,?,?,?)');
-        $req->execute(array($_POST['name'],$logo,$_POST['link'],$_POST['description']));
+        $req = $this->manager->dbConnect()->prepare('INSERT INTO actor (name, logo, link, tiny_desc, description) VALUES (?,?,?,?,?)');
+        $req->execute(array($_POST['name'],$logo,$_POST['link'],$_POST['description'], $_POST['tiny_desc']));
     }
 
     /**
@@ -81,25 +81,5 @@ class ActorManager
         return $actorName;
     }
 
-    public function getLike()
-    {
-        $req = $this->manager->dbConnect()->prepare('SELECT actor_like, actor_dislike FROM actor WHERE actor_id = ?');
-        $req->execute(array($actor_id));
-        return $req;
-    }
-
-    public function addLike()
-    {
-        $addLike = 1 +$like;
-        $req = $this->manager->dbConnect()->prepare('UPDATE actor SET actor_like = ?  WHERE actor_id = ?');
-        $req->execute(array($addLike));
-    }
-
-    public function addDislike()
-    {
-        $addDislike = 1 + $dislike;
-        $req = $this->manager->dbConnect()->prepare('UPDATE actor SET actor_dislike = ? WHERE actor_id = ?');
-        $req->execute(array($addDislike));
-    }
 
 }

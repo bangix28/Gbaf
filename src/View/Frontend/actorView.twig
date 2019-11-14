@@ -5,12 +5,12 @@
 
 {% block content %}
     <header>
-        {{ include('Frontend/layout/header.twig') }}
+        {{ include('layout/header.twig') }}
     </header>
     {% for actor in actor %}
         <section class="container-fluid h-100  text-dark">
             <div class="row justify-content-center align-items-center">
-                 <img src="images/upload_images/{{ actor.logo }}">
+                 <img class="img-fluid" alt="'Logo du partenaire" src="images/upload_images/{{ actor.logo }}">
             </div>
             <div class="offset-2 col-10 p-3">
                 <h2 class="lead"><a href="{{ actor.link }}">{{ actor.link }}</a></h2>
@@ -27,12 +27,8 @@
                    <div class="offset-2 col-3">
                        <a class="btn btn-success" href="index.php?access=addComment&amp;id={{ actor.actor_id }}">Nouveau<br> commentaires</a>
                    </div>
-                    <form method="post" action="index.php?access=actor&amp;vote=1&amp;id={{ actor.actor_id }}">
-                         <button class="rounded">{{ actor.actor_like }}<i class="far fa-thumbs-up"> </i></button>
-                    </form>
-                    <form method="post" action="index.php?access=actor&amp;vote=-1&amp;id={{ actor.actor_id }}">
-                        <button class="rounded"><i class="far fa-thumbs-down"></i> {{ actor.actor_dislike }}</button>
-                </form>
+                    <div class="col-lg-2 row">
+                    </div>
                 </div>
     {% endfor %}
     {% for data in comment %}

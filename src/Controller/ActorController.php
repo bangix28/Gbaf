@@ -36,7 +36,7 @@ class ActorController extends MainController
     public function addActor()
     {
         $user = $this->userManager->getUser();
-        if (!empty($_POST['name']) && !empty($_FILES['logo']) &&!empty($_POST['link']) && !empty($_POST['description']))
+        if (!empty($_POST['name']) && !empty($_FILES['logo']) &&!empty($_POST['link']) && !empty($_POST['description'] && !empty($_POST['tiny_desc'])))
         {
             $actorName = $this->actorManager->actorNameVerification();
             if ($actorName == 0 ) {
@@ -52,27 +52,9 @@ class ActorController extends MainController
 
     }
 
-    public function getComments()
-    {
-        $getcomment = $this->actorManager->getComments();
-        return $getcomment;
-    }
-     public function getLike()
-    {
-        $this->commentManager->getLike();
-    }
-
-    public function addLike()
-    {
-        $req = $this->commentManager->getLike();
-        $like = $req->fetch();
-        $addlike = $like['actor_like'];
-        $addlike++;
-        $this->commentManager->addLike($addlike);
-    }
-
     public function getActor()
     {
+
 
         $user = $this->userManager->getUser();
         $actor = $this->actorManager->getActor();
