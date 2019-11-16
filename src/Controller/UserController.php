@@ -72,15 +72,30 @@ class UserController extends MainController
        $user = $this->userManager->testUsername();
        if ($user == true)
        {
-           $answer = $this->userManager->recoverPassword();
-           $test = $_POST['answer'] === $answer['answer'];
-           if ($test === true) {
-               $userId = $user['id_user'];
-               $this->userManager->changePassword($userId);
-           }
-           return $this->render('Backend/answerView.twig', ['user' => $user ]);
+           $_SESSION['id'] = $user['id_user'];
+           header('location:index.php?access=changePassword');
        }
        return $this->render('Backend/recoverPasswordView.twig');
+    }
+
+    public function changePassword()
+    {
+        $userId = $_SESSION['id'];
+        $user = $this->userManager->getUser();
+        $req = $this->userManager->getQuestion($userId);
+        $answer = $req['answer'];
+        if (isset($_POST['answer']) && !empty($_POST['answer'])){
+           if (isset($_POST['password']) && !empty($_POST['password'])) {
+               if ($_POST['answer'] == $answer) {
+               $password = password_hash(htmlspecialchars($_POST['password']), PASSWORD_DEFAULT);
+               $this->userManager->changePassword($userId, $password);
+               header('Location:index.php?access=connect');
+               }
+               $message = 'pas la bonne réponse !';
+               $this->render('Backend/answerView.twig', ['user' => $user , 'message' => $message]);
+           }
+        }
+        return $this->render('Backend/answerView.twig', ['user' => $user ]);
     }
 
     public function userSettings()
@@ -92,7 +107,8 @@ class UserController extends MainController
 
             if (isset($_POST['password'])) {
                 $userId = $_SESSION['id'];
-                $this->userManager->changePassword($userId);
+                $password = password_hash(htmlspecialchars($_POST['password']), PASSWORD_DEFAULT);
+                $this->userManager->changePassword($userId, $password);
             }
             header('location:index.php?access=home');
         }

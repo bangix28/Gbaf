@@ -71,20 +71,26 @@ class UserManager
 
     }
 
-    public function changePassword($userId)
+    public function changePassword($userId, $password)
     {
-        $pass_hach = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $req = $this->manager->dbConnect()->prepare('UPDATE user SET password = ?  WHERE  id_user = ?');
-        $req->execute(array($pass_hach, $userId));
+        $req->execute(array($password, $userId));
     }
 
     public function recoverPassword()
     {
         $req = $this->manager->dbConnect()->prepare('SELECT id_user, username ,question, answer FROM user WHERE username = ?');
         $req->execute(array($_POST['username']));
-        $user = $req->fetch();
-        return $user;
+        return $req;
     }
+    public function getQuestion($userId)
+    {
+        $req = $this->manager->dbConnect()->prepare('SELECT answer FROM user WHERE  id_user = ?');
+        $req->execute(array($userId));
+        $answer = $req->fetch();
+        return $answer;
+    }
+
 
 
 

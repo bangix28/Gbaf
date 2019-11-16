@@ -87,6 +87,9 @@ class Router
                 case 'like':
                     $response = $this->actorController->addLike();
                     break;
+                case 'changePassword' :
+                    $response = $this->userController->changePassword();
+                    break;
             }
             echo filter_var($response);
 
