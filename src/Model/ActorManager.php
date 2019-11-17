@@ -81,5 +81,30 @@ class ActorManager
         return $actorName;
     }
 
+    public function addVote() {
+        $req = $this->manager->dbConnect()->prepare('INSERT INTO vote(actor_id, user_id,vote) VALUES(?,?,?)');
+        $req->execute(array($_GET['id'],$_SESSION['id'],$_GET['vote']));
+    }
+
+    public function getLike()
+    {
+        $req = $this->manager->dbConnect()->prepare('SELECT actor_like, actor_dislike FROM actor WHERE actor_id = ?');
+        $req->execute(array($_GET['id']));
+        $like = $req->fetch();
+        return $like;
+    }
+    public function addLike($like)
+    {
+        var_dump($addLike = 1 + $like['actor_like']);
+        $req = $this->manager->dbConnect()->prepare('UPDATE actor SET actor_like = ? WHERE actor_id = ?');
+        $req->execute(array($addLike, $_GET['id']));
+    }
+    public function addDislike($like)
+    {
+        $addDislike = 1 + $like['actor_dislike'];
+        $req = $this->manager->dbConnect()->prepare('UPDATE actor SET actor_dislike = ? WHERE actor_id = ?');
+        $req->execute(array($addDislike));
+    }
+
 
 }

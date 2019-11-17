@@ -69,5 +69,45 @@ class ActorController extends MainController
              'nbrComment' => $nbrComment]);
     }
 
+    public function getComments()
+    {
+        $getcomment = $this->actorManager->getComments();
+        return $getcomment;
+    }
+
+    public function voteVerification()
+    {
+      $vote = $this->userManager->voteVerification();
+      if ($vote == false) {
+          $this->actorManager->addVote();
+          var_dump($like = $this->actorManager->getLike());
+          $vote = $_GET['vote'];
+          switch ($vote)
+          {
+              case '1':
+                $this->actorManager->addLike($like);
+              break;
+              case '-1':
+                  $this->actorManager->addDislike($like);
+
+          }
+          header('Location:index.php?access=actor&id=' . $_GET['id']);
+      } else {
+          header('Location:index.php?access=actor&id=' . $_GET['id']);
+      }
+
+
+    }
+
+    public function addLike()
+    {
+        $req = $this->commentManager->getLike();
+        $like = $req->fetch();
+        $addlike = $like['actor_like'];
+        $addlike++;
+        $this->commentManager->addLike($addlike);
+    }
+
+
 
 }
