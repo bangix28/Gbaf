@@ -103,7 +103,7 @@ class ActorManager
     {
         $addDislike = 1 + $like['actor_dislike'];
         $req = $this->manager->dbConnect()->prepare('UPDATE actor SET actor_dislike = ? WHERE actor_id = ?');
-        $req->execute(array($addDislike));
+        $req->execute(array($addDislike, $_GET['id']));
     }
 
 
