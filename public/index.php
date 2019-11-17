@@ -10,7 +10,7 @@ if (session_status() === PHP_SESSION_NONE) {
 /* Create the router */
 $router = new Router();
 /* Test Zone (uncomment Debugger to get Tracy & var_dump to get router object) */
-Debugger::enable();
+//Debugger::enable();
 // var_dump($router);
 /* Run application */
 $router->run();
