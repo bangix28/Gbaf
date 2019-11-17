@@ -59,8 +59,8 @@ class ActorController extends MainController
         $user = $this->userManager->getUser();
         $actor = $this->actorManager->getActor();
         $actor_id = $_GET['id'];
-        $nbrComment = 0 + $this->commentManager->getComments($actor_id)->fetchColumn();
         $comment = $this->commentManager->getComments($actor_id);
+        $nbrComment = $comment->rowCount();
 
          return $this->render('Frontend/actorView.twig', [
              'user' => $user,
