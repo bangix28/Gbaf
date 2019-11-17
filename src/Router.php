@@ -90,6 +90,9 @@ class Router
                 case 'changePassword' :
                     $response = $this->userController->changePassword();
                     break;
+                case 'addVote':
+                    $response = $this->actorController->voteVerification();
+                    break;
             }
             echo filter_var($response);
 
