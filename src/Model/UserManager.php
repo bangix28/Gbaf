@@ -23,7 +23,7 @@ class UserManager
     public function testUsername()
     {
 
-        $req = $this->manager->dbConnect()->prepare('SELECT EXISTS(SELECT username FROM user WHERE username = ?) AS username_exist');
+        $req = $this->manager->dbConnect()->prepare('SELECT id_user FROM user WHERE username = ?');
         $req->execute(array($_POST['username']));
         $user = $req->fetchColumn();
         return $user;
@@ -59,7 +59,7 @@ class UserManager
     {
         $userId = $_SESSION['id'];
         $req = $this->manager->dbConnect()->prepare('SELECT * FROM user WHERE id_user = ?');
-        $req->execute(array($userId));
+        $req->execute(array($_SESSION['id']));
         $user = $req->fetch();
         return $user;
     }
@@ -71,10 +71,10 @@ class UserManager
 
     }
 
-    public function changePassword($userId, $password)
+    public function changePassword($password)
     {
         $req = $this->manager->dbConnect()->prepare('UPDATE user SET password = ?  WHERE  id_user = ?');
-        $req->execute(array($password, $userId));
+        $req->execute(array($password, $_GET['id']));
     }
 
     public function recoverPassword()
@@ -83,13 +83,22 @@ class UserManager
         $req->execute(array($_POST['username']));
         return $req;
     }
-    public function getQuestion($userId)
+    public function getQuestion()
     {
-        $req = $this->manager->dbConnect()->prepare('SELECT answer FROM user WHERE  id_user = ?');
-        $req->execute(array($userId));
+        $req = $this->manager->dbConnect()->prepare('SELECT answer, question FROM user WHERE  id_user = ?');
+        $req->execute(array($_GET['id']));
         $answer = $req->fetch();
         return $answer;
     }
+
+    public function voteVerification()
+    {
+        $req = $this->manager->dbConnect()->prepare('SELECT * FROM vote WHERE actor_id = ? AND user_id = ? ');
+        $req->execute(array($_GET['id'], $_SESSION['id']));
+        $vote = $req->fetch();
+        return $vote;
+    }
+
 
 
 
