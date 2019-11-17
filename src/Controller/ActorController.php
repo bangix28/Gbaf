@@ -16,8 +16,14 @@ class ActorController extends MainController
      */
     private $actorManager = null;
 
+    /**
+     * @var UserManager|null
+     */
     private  $userManager = null;
 
+    /**
+     * @var CommentManager|null
+     */
     private $commentManager = null;
     /**
      * ActorController constructor.
@@ -52,6 +58,9 @@ class ActorController extends MainController
 
     }
 
+    /**
+     * @return string
+     */
     public function getActor()
     {
 
@@ -69,12 +78,18 @@ class ActorController extends MainController
              'nbrComment' => $nbrComment]);
     }
 
+    /**
+     * @return mixed
+     */
     public function getComments()
     {
         $getcomment = $this->actorManager->getComments();
         return $getcomment;
     }
 
+    /**
+     *
+     */
     public function voteVerification()
     {
       $vote = $this->userManager->voteVerification();
@@ -99,6 +114,9 @@ class ActorController extends MainController
 
     }
 
+    /**
+     *
+     */
     public function addLike()
     {
         $req = $this->commentManager->getLike();

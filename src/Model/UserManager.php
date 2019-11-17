@@ -10,8 +10,14 @@ use Exception;
 class UserManager
 {
 
+    /**
+     * @var \App\Model\Manager|null
+     */
     private $manager = null;
 
+    /**
+     * UserManager constructor.
+     */
     public function __construct()
     {
         $this->manager = new Manager();
@@ -55,6 +61,9 @@ class UserManager
         }
     }
 
+    /**
+     * @return mixed
+     */
     public function getUser()
     {
         $userId = $_SESSION['id'];
@@ -64,6 +73,9 @@ class UserManager
         return $user;
     }
 
+    /**
+     *
+     */
     public function editUser()
     {
         $req = $this->manager->dbConnect()->prepare('UPDATE user SET  name = ? , lastname = ?, question = ?, answer = ? WHERE id_user = ?');
@@ -71,18 +83,28 @@ class UserManager
 
     }
 
+    /**
+     * @param $password
+     */
     public function changePassword($password)
     {
         $req = $this->manager->dbConnect()->prepare('UPDATE user SET password = ?  WHERE  id_user = ?');
         $req->execute(array($password, $_GET['id']));
     }
 
+    /**
+     * @return bool|\PDOStatement
+     */
     public function recoverPassword()
     {
         $req = $this->manager->dbConnect()->prepare('SELECT id_user, username ,question, answer FROM user WHERE username = ?');
         $req->execute(array($_POST['username']));
         return $req;
     }
+
+    /**
+     * @return mixed
+     */
     public function getQuestion()
     {
         $req = $this->manager->dbConnect()->prepare('SELECT answer, question FROM user WHERE  id_user = ?');
@@ -91,6 +113,9 @@ class UserManager
         return $answer;
     }
 
+    /**
+     * @return mixed
+     */
     public function voteVerification()
     {
         $req = $this->manager->dbConnect()->prepare('SELECT * FROM vote WHERE actor_id = ? AND user_id = ? ');

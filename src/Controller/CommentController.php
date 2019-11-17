@@ -7,12 +7,25 @@ use App\Model\CommentManager;
 use App\Model\UserManager;
 
 
+/**
+ * Class CommentController
+ * @package App\Controller
+ */
 class CommentController extends MainController
 {
+    /**
+     * @var ActorManager|null
+     */
     private $actorManager = null;
 
+    /**
+     * @var UserManager|null
+     */
     private  $userManager = null;
 
+    /**
+     * @var CommentManager|null
+     */
     private $commentManager = null;
     /**
      * ActorController constructor.
@@ -25,6 +38,9 @@ class CommentController extends MainController
         $this->commentManager = new CommentManager();
     }
 
+    /**
+     * @return string
+     */
     public function addComment()
     {
         $user = $this->userManager->getUser();

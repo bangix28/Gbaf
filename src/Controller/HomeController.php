@@ -23,6 +23,9 @@ class HomeController extends MainController
      */
     private  $actorManager = null;
 
+    /**
+     * @var UserManager|null
+     */
     private $userManager = null;
 
     /**

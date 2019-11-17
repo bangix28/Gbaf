@@ -61,12 +61,21 @@ class UserController extends MainController
         return $this->render('Frontend/userRegisterView.twig');
     }
 
+    /**
+     *
+     */
     public function disconnect()
     {
         session_destroy();
         header('Location:index.php?access=connect');
     }
 
+    /**
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function recoverPassword()
     {
         if (isset($_POST['username']) && !empty($_POST['username'])) {
@@ -81,6 +90,12 @@ class UserController extends MainController
        return $this->render('Backend/recoverPasswordView.twig');
     }
 
+    /**
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function changePassword()
     {
         $req = $this->userManager->getQuestion();
@@ -93,12 +108,18 @@ class UserController extends MainController
                header('Location:index.php?access=connect');
                }
                $message = 'pas la bonne réponse !';
-               $this->render('Backend/answerView.twig', ['user' => $user , 'message' => $message]);
+               $this->render('Backend/answerView.twig', ['user' => $req , 'message' => $message]);
            }
         }
         return $this->render('Backend/answerView.twig', ['user' => $req ]);
     }
 
+    /**
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function userSettings()
     {
         $user = $this->userManager->getUser();
