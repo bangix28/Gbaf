@@ -25,7 +25,6 @@ class ActorController extends MainController
     public function __construct()
     {
         parent::__construct();
-        $this->actorManager = new ActorManager();
         $this->userManager = new UserManager();
         $this->commentManager = new CommentManager();
     }
