@@ -61,28 +61,65 @@ class UserController extends MainController
         return $this->render('Frontend/userRegisterView.twig');
     }
 
+    /**
+     *
+     */
     public function disconnect()
     {
         session_destroy();
         header('Location:index.php?access=connect');
     }
 
+    /**
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function recoverPassword()
     {
-       $user = $this->userManager->testUsername();
-       if ($user == true)
-       {
-           $answer = $this->userManager->recoverPassword();
-           $test = $_POST['answer'] === $answer['answer'];
-           if ($test === true) {
+        if (isset($_POST['username']) && !empty($_POST['username'])) {
+            var_dump($user = $this->userManager->testUsername());
+
+           if ($user == true)
+           {
                $userId = $user['id_user'];
-               $this->userManager->changePassword($userId);
+               header('location:index.php?access=changePassword&id='. $userId);
            }
-           return $this->render('Backend/answerView.twig', ['user' => $user ]);
-       }
+        }
        return $this->render('Backend/recoverPasswordView.twig');
     }
 
+    /**
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
+    public function changePassword()
+    {
+        $req = $this->userManager->getQuestion();
+        $answer = $req['answer'];
+        if (isset($_POST['answer']) && !empty($_POST['answer'])){
+           if (isset($_POST['password']) && !empty($_POST['password'])) {
+               if ($_POST['answer'] == $answer) {
+               $password = password_hash(htmlspecialchars($_POST['password']), PASSWORD_DEFAULT);
+               $this->userManager->changePassword($password);
+               header('Location:index.php?access=connect');
+               }
+               $message = 'pas la bonne réponse !';
+               $this->render('Backend/answerView.twig', ['user' => $req , 'message' => $message]);
+           }
+        }
+        return $this->render('Backend/answerView.twig', ['user' => $req ]);
+    }
+
+    /**
+     * @return string
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
+     */
     public function userSettings()
     {
         $user = $this->userManager->getUser();
@@ -92,7 +129,8 @@ class UserController extends MainController
 
             if (isset($_POST['password'])) {
                 $userId = $_SESSION['id'];
-                $this->userManager->changePassword($userId);
+                $password = password_hash(htmlspecialchars($_POST['password']), PASSWORD_DEFAULT);
+                $this->userManager->changePassword($userId, $password);
             }
             header('location:index.php?access=home');
         }

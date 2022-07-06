@@ -3,8 +3,7 @@
 <header>
     {{ include('layout/header.twig') }}
 </header>
-    <form class="offset-2 p-3" method="POST">
-
+    <form class="offset-2 align-items-center" method="POST">
             <div class="control-group">
                 <label class="control-label" for="name">nom</label>
                 <div class="controls">
@@ -30,10 +29,10 @@
                 <!-- Answer -->
                 <label class="control-label" for="question">Question</label>
                 <div class="controls">
-                    <select id="question" name="question"  class="input-xlarge">
-                        <option value="1">Question 1</option>
-                        <option value="2">Question 2</option>
-                        <option value="3">Question 3</option>
+                    <select id="question" name="question" class="input-xlarge">
+                        <option value="Quelle etait votre surnom enfant ?">Quelle etait votre surnom enfant ?</option>
+                        <option value="Quelle est le nom de votre mére ?">Quelle est le nom de votre mére ?</option>
+                        <option value="Dans quelle ville etes vous né ?">Dans quelle ville etes vous né ?</option>
                     </select>
                 </div>
                 <div class="control-group">
@@ -50,6 +49,9 @@
                 <div class="controls">
                     <button class="btn btn-success">Register</button>
                 </div>
+                <p class="lead p-3">
+                    <a href="index.php?access=disconnect">déconnection</a>
+                </p>
                 <div class="col-12">
                     <h2 class="text-center">{{ message }}</h2>
                 </div>

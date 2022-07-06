@@ -16,8 +16,14 @@ class ActorController extends MainController
      */
     private $actorManager = null;
 
+    /**
+     * @var UserManager|null
+     */
     private  $userManager = null;
 
+    /**
+     * @var CommentManager|null
+     */
     private $commentManager = null;
     /**
      * ActorController constructor.
@@ -51,6 +57,9 @@ class ActorController extends MainController
 
     }
 
+    /**
+     * @return string
+     */
     public function getActor()
     {
 
@@ -58,8 +67,8 @@ class ActorController extends MainController
         $user = $this->userManager->getUser();
         $actor = $this->actorManager->getActor();
         $actor_id = $_GET['id'];
-        $nbrComment = 0 + $this->commentManager->getComments($actor_id)->fetchColumn();
         $comment = $this->commentManager->getComments($actor_id);
+        $nbrComment = $comment->rowCount();
 
          return $this->render('Frontend/actorView.twig', [
              'user' => $user,
@@ -67,6 +76,55 @@ class ActorController extends MainController
              'comment' => $comment,
              'nbrComment' => $nbrComment]);
     }
+
+    /**
+     * @return mixed
+     */
+    public function getComments()
+    {
+        $getcomment = $this->actorManager->getComments();
+        return $getcomment;
+    }
+
+    /**
+     *
+     */
+    public function voteVerification()
+    {
+      $vote = $this->userManager->voteVerification();
+      if ($vote == false) {
+          $this->actorManager->addVote();
+          var_dump($like = $this->actorManager->getLike());
+          $vote = $_GET['vote'];
+          switch ($vote)
+          {
+              case '1':
+                $this->actorManager->addLike($like);
+              break;
+              case '-1':
+                  $this->actorManager->addDislike($like);
+
+          }
+          header('Location:index.php?access=actor&id=' . $_GET['id']);
+      } else {
+          header('Location:index.php?access=actor&id=' . $_GET['id']);
+      }
+
+
+    }
+
+    /**
+     *
+     */
+    public function addLike()
+    {
+        $req = $this->commentManager->getLike();
+        $like = $req->fetch();
+        $addlike = $like['actor_like'];
+        $addlike++;
+        $this->commentManager->addLike($addlike);
+    }
+
 
 
 }
